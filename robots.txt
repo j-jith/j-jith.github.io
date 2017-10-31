@@ -1,0 +1,4 @@
+Sitemap: https://j-jith.github.io/sitemapindex.xml
+
+User-Agent: *
+Host: j-jith.github.io

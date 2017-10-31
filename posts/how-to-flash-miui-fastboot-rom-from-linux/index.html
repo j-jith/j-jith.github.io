@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to flash MIUI Fastboot ROM from Linux | Jithin's Blog</title>
+<link href="../../assets/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/html4css1.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/nikola_rst.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/code.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/colorbox.css" rel="stylesheet" type="text/css">
+<link href="../../assets/css/theme.css" rel="stylesheet" type="text/css">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
+<meta property="og:site_name" content="Jithin's Blog">
+<meta property="og:title" content="How to flash MIUI Fastboot ROM from Linux">
+<meta property="og:url" content="https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/">
+<meta property="og:description" content="Download the ROM suitable for your device from the MIUI
+site and extract the downloaded archive
+Download and extract the Android SDK Platform Tools
+Make sure adb and fastboot (components of platform-t">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-10-31T10:19:08+05:30">
+<meta property="article:tag" content="android">
+<meta property="article:tag" content="linux">
+<meta property="article:tag" content="miui">
+</head>
+<body>
+<a href="#content" class="sr-only sr-only-focusable">Skip to main content</a>
+
+<!-- Menubar -->
+
+<nav class="navbar navbar-inverse navbar-static-top"><div class="container">
+<!-- This keeps the margins nice -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://j-jith.github.io/">
+
+                <span id="blog-title">Jithin's Blog</span>
+            </a>
+        </div>
+<!-- /.navbar-header -->
+        <div class="collapse navbar-collapse" id="bs-navbar" aria-expanded="false">
+            <ul class="nav navbar-nav">
+<li>
+<a href="../../archive.html">Archive</a>
+                </li>
+<li>
+<a href="../../categories/">Tags</a>
+                </li>
+<li>
+<a href="../../rss.xml">RSS feed</a>
+
+                
+            </li>
+</ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+    <a href="index.rst" id="sourcelink">Source</a>
+    </li>
+
+                
+            </ul>
+</div>
+<!-- /.navbar-collapse -->
+    </div>
+<!-- /.container -->
+</nav><!-- End of Menubar --><div class="container" id="content" role="main">
+    <div class="body-content">
+        <!--Body content-->
+        <div class="row">
+            
+            
+<article class="post-text h-entry hentry postpage" itemscope="itemscope" itemtype="http://schema.org/Article"><header><h1 class="p-name entry-title" itemprop="headline name"><a href="." class="u-url">How to flash MIUI Fastboot ROM from Linux</a></h1>
+
+        <div class="metadata">
+            <p class="byline author vcard"><span class="byline-name fn" itemprop="author">
+                    Jithin Jith
+            </span></p>
+            <p class="dateline"><a href="." rel="bookmark"><time class="published dt-published" datetime="2017-10-31T10:19:08+05:30" itemprop="datePublished" title="2017-10-31 10:19">2017-10-31 10:19</time></a></p>
+            
+        <p class="sourceline"><a href="index.rst" class="sourcelink">Source</a></p>
+
+        </div>
+        
+
+    </header><div class="e-content entry-content" itemprop="articleBody text">
+    <div>
+<ul class="simple">
+<li>Download the ROM suitable for your device from the <a class="reference external" href="http://en.miui.com/a-234.html">MIUI
+site</a> and extract the downloaded archive</li>
+<li>Download and extract the <a class="reference external" href="https://developer.android.com/studio/releases/platform-tools.html">Android SDK Platform Tools</a>
+</li>
+<li>Make sure <tt class="docutils literal">adb</tt> and <tt class="docutils literal">fastboot</tt> (components of platform-tools) are in your
+path</li>
+</ul>
+<pre class="code bash"><a name="rest_code_3743ab6fb5744b0b929ae988c02d227d-1"></a>$ <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>path/to/android/sdk/platform-tools:<span class="nv">$PATH</span>
+</pre>
+<ul class="simple">
+<li>Connect your device to your computer using a USB cable and enable <em>USB
+Debugging</em> in your device's settings. Check if your device is detected.</li>
+</ul>
+<pre class="code bash"><a name="rest_code_ea325137eae74e22b67824464a1203a2-1"></a>$ adb devices
+</pre>
+<ul class="simple">
+<li>If device is listed, reboot to bootloader</li>
+</ul>
+<pre class="code bash"><a name="rest_code_d59bb944e9a549c0b43d129ead1728c7-1"></a>$ adb reboot bootloader
+</pre>
+<ul class="simple">
+<li>Check if your device is detected by fastboot</li>
+</ul>
+<pre class="code bash"><a name="rest_code_a7b94f9a9d2b4a01b0301fd9438a1b5a-1"></a>$ fastboot devices
+</pre>
+<ul class="simple">
+<li>You may need to use <tt class="docutils literal">sudo</tt> before <tt class="docutils literal">fastboot</tt> if you get a permission denied
+error</li>
+<li>There are two scripts for flashing the ROM:<ol class="arabic">
+<li>
+<tt class="docutils literal">flash_all.sh</tt> - Flash ROM and erase user data</li>
+<li>
+<tt class="docutils literal">flash_all_except_data_storage.sh</tt> - Flash ROM without erasing user data</li>
+</ol>
+</li>
+<li>Whichever script you decide to use, make sure that the interpreter is
+mentioned at the top of the script like</li>
+</ul>
+<pre class="code bash"><a name="rest_code_4321c852ec0346fe8b6f858ab7ee2034-1"></a><span class="ch">#!/bin/sh</span>
+</pre>
+<ul class="simple">
+<li>If the above line is missing, add it to the top of the script</li>
+<li>Make the script executable (I've chosen <tt class="docutils literal">flash_all.sh</tt>)</li>
+</ul>
+<pre class="code bash"><a name="rest_code_796866a1f1384e1ead5f747311bc593b-1"></a>$ <span class="nb">cd</span> path/to/extracted/ROM/archive
+<a name="rest_code_796866a1f1384e1ead5f747311bc593b-2"></a>$ chmod a+x ./flash_all.sh
+</pre>
+<ul class="simple">
+<li>Run the script</li>
+</ul>
+<pre class="code bash"><a name="rest_code_a1058c31ceb547eb94df93ad753161d0-1"></a>$ ./flash_all.sh
+</pre>
+<ul class="simple">
+<li>You may need to run <tt class="docutils literal">sudo ./flash_all.sh</tt> if you had to use <tt class="docutils literal">sudo</tt> with <tt class="docutils literal">fastboot</tt>
+</li>
+<li>Sit back and relax. The script needs no user interaction. After flashing the
+ROM, the scipt will reboot your device.</li>
+<li>Reboot will take quit a bit of time. Don't panic.</li>
+</ul>
+</div>
+    </div>
+    <aside class="postpromonav"><nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/android/" rel="tag">android</a></li>
+            <li><a class="tag p-category" href="../../categories/linux/" rel="tag">linux</a></li>
+            <li><a class="tag p-category" href="../../categories/miui/" rel="tag">miui</a></li>
+        </ul></nav></aside></article>
+</div>
+        <!--End of body content-->
+
+        <footer id="footer">
+            Contents © 2017         <a href="mailto:j.jith@outlook.com">Jithin Jith</a> - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+            
+        </footer>
+</div>
+</div>
+
+
+            <script src="../../assets/js/jquery.min.js"></script><script src="../../assets/js/bootstrap.min.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><script src="../../assets/js/fancydates.js"></script><script src="../../assets/js/jquery.colorbox-min.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</body>
+</html>
