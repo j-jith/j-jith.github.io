@@ -1,5 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jithin's Blog (Posts about android)</title><link>https://j-jith.github.io/</link><description></description><atom:link href="https://j-jith.github.io/categories/android.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2017 &lt;a href="mailto:j.jith@outlook.com"&gt;Jithin Jith&lt;/a&gt; </copyright><lastBuildDate>Tue, 31 Oct 2017 04:53:32 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to flash MIUI Fastboot ROM from Linux</title><link>https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;ul class="simple"&gt;
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jithin's Blog (Posts about android)</title><link>https://j-jith.github.io/</link><description></description><atom:link type="application/rss+xml" rel="self" href="https://j-jith.github.io/categories/android.xml"></atom:link><language>en</language><copyright>Contents © 2017 &lt;a href="mailto:j.jith@outlook.com"&gt;Jithin Jith&lt;/a&gt; </copyright><lastBuildDate>Tue, 31 Oct 2017 05:48:06 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Installing a custom ROM on Xiaomi Redmi 2</title><link>https://j-jith.github.io/posts/installing-a-custom-rom-on-xiaomi-redmi-2/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been installing and testing a lot of custom ROMs recently on my Redmi 2.
+This is a brief tutorial describing all the steps involved in installing a
+custom ROM (with specific steps required for Redmi 2).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Before proceeding, make sure you have backed up all your important data to
+another device.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="section" id="custom-recovery"&gt;
+&lt;h2&gt;Custom Recovery&lt;/h2&gt;
+&lt;p&gt;Most custom ROMs require a custom recovery. In this section, I will provide the
+steps for installing the most popular recovery nowadays - &lt;a class="reference external" href="https://twrp.me"&gt;TWRP&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;First step is to install the &lt;em&gt;Android SDK platform tools&lt;/em&gt; which include the
+&lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; command. &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; is necessary for installing the custom
+recovery. You can get the platform tools for most OS &lt;a class="reference external" href="https://developer.android.com/studio/releases/platform-tools.html"&gt;here&lt;/a&gt;. If you
+are on Ubuntu, there is a very &lt;a class="reference external" href="https://packages.ubuntu.com/xenial/android-sdk-platform-tools"&gt;convenient package&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you have downloaded the platform tools manually, extract the archive to a
+directory of your choice, and open up your command line/terminal in the said
+directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Switch off your phone, and enter fastboot mode by pressing the volume down
+button and power button simultaneously. Connect the phone to your computer
+using a USB cable.&lt;/p&gt;
+&lt;p&gt;In your terminal, type &lt;tt class="docutils literal"&gt;fastboot devices&lt;/tt&gt; to make sure your phone is being
+detected. The output of the command should list your device. If not, check your
+USB cable connection. If it is still not being detected, you may have a broken
+USB port on your phone or a broken USB cable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Download the TWRP image from &lt;a class="reference external" href="https://dl.twrp.me/wt88047/"&gt;dl.twrp.me/wt88047/&lt;/a&gt;. (Note
+that the image is for &lt;strong&gt;wt88047&lt;/strong&gt; which includes the following models -
+&lt;strong&gt;20148(11/17/18/19)&lt;/strong&gt;. I'm not sure if this image works on &lt;strong&gt;wt86047
+(2014813)&lt;/strong&gt;. You can find an appropriate TWRP image on MIUI or XDA forums.
+Note down the path to where you have downloaded the image.) It will be
+convenient to copy it to your current working directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Now, flash the recovery using the following command:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_0ca94bdfd9ca48cea4fa3e90ce810a02-1"&gt;&lt;/a&gt;fastboot flash recovery /path/to/twrp/image
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;If you restart your phone now, MIUI may rewrite your recovery. Instead, you
+should reboot directly to your new recovery once before rebooting to MIUI.
+This can be done by&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_9656cf5aef92473d969f60ab728b88ff-1"&gt;&lt;/a&gt;fastboot boot /path/to/twrp/image
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;That's it. You have successfully installed a custom recovery. You can now
+reboot into MIUI from the recovery.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="firmware"&gt;
+&lt;h2&gt;Firmware&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;You have to ensure that your phone has the correct firmware version. Some
+(actually, most) ROMs require the Lollipop (Android 5.x) bootloader. If your
+MIUI is already on Lollipop, you can skip this section. If your MIUI is on
+Kitkat (Android 4.x) or lower, you need to flash the Lollipop bootloader. The
+requisite zip files can be found in the &lt;a class="reference external" href="https://forum.xda-developers.com/showpost.php?p=70328051&amp;amp;postcount=3"&gt;Lineage OS thread at XDA&lt;/a&gt; by
+&lt;em&gt;nicknitewolf&lt;/em&gt;. I'm reproducing the links here - &lt;a class="reference external" href="https://androidfilehost.com/?fid=673368273298919092"&gt;wt88047&lt;/a&gt;, &lt;a class="reference external" href="https://androidfilehost.com/?fid=385035244224408045"&gt;wt86047&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Copy the zip file onto your phone's SD card. Reboot to your custom recovery
+(Switch off your phone, and press volume up, volume down, and power buttons
+simultaneously). Choose the &lt;strong&gt;Install&lt;/strong&gt; option which will take you to a file
+browser. Find the zip file you just copied and select it. In the next screen,
+confirm that you want to flash this file. That's it. You have successfully
+updated your firmware.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rom"&gt;
+&lt;h2&gt;ROM&lt;/h2&gt;
+&lt;p&gt;Whichever custom ROM you have chosen should have detailed installation
+instructions. I will provide the &lt;em&gt;general&lt;/em&gt; steps involved in flashing a new ROM
+here.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Download the zip file for the ROM, and get the appropriate Google apps
+(GApps) from &lt;a class="reference external" href="http://opengapps.org/"&gt;opengapps.org&lt;/a&gt;. Copy both zip files to
+your phone's SD card. Reboot into recovery (power off, and press vol. up +
+vol. down + power).&lt;/li&gt;
+&lt;li&gt;Choose the &lt;strong&gt;Wipe&lt;/strong&gt; option in recovery. Choose the &lt;strong&gt;Advanced wipe&lt;/strong&gt; option
+in the next screen. In the following screen, select &lt;strong&gt;Dalvik/ART Cache,
+System, Data, and Cache&lt;/strong&gt;. Confirm that you want to wipe the selected
+partitions.&lt;/li&gt;
+&lt;li&gt;Next, go back to the home screen of your recovery, and choose the &lt;strong&gt;Install&lt;/strong&gt;
+option. In the file browser, find your &lt;strong&gt;ROM zip&lt;/strong&gt; and confirm its
+installation. Once the installation is done, choose &lt;strong&gt;Install&lt;/strong&gt; again, and
+select your &lt;strong&gt;GApps zip&lt;/strong&gt; in the file browser. Wait for the installation to
+finish, and reboot. You should now be greeted by the boot animation of your
+new ROM.&lt;/li&gt;
+&lt;li&gt;That's it. Enjoy your new ROM!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>android</category><category>redmi2</category><guid>https://j-jith.github.io/posts/installing-a-custom-rom-on-xiaomi-redmi-2/</guid><pubDate>Tue, 31 Oct 2017 05:38:36 GMT</pubDate></item><item><title>How to flash MIUI Fastboot ROM from Linux</title><link>https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;Download the ROM suitable for your device from the &lt;a class="reference external" href="http://en.miui.com/a-234.html"&gt;MIUI
 site&lt;/a&gt; and extract the downloaded archive&lt;/li&gt;
 &lt;li&gt;Download and extract the &lt;a class="reference external" href="https://developer.android.com/studio/releases/platform-tools.html"&gt;Android SDK Platform Tools&lt;/a&gt;&lt;/li&gt;

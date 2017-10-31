@@ -10,68 +10,72 @@
   <lastmod>2017-10-31T04:51:00Z</lastmod>
  </url>
  <url>
-  <loc>https://j-jith.github.io/2012/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
- </url>
- <url>
   <loc>https://j-jith.github.io/2017/</loc>
   <lastmod>2017-10-31T04:51:00Z</lastmod>
  </url>
  <url>
   <loc>https://j-jith.github.io/archive.html</loc>
-  <lastmod>2017-10-31T04:54:00Z</lastmod>
- </url>
- <url>
-  <loc>https://j-jith.github.io/authors/</loc>
-  <lastmod>2017-10-31T04:51:00Z</lastmod>
- </url>
- <url>
-  <loc>https://j-jith.github.io/authors/jithin-jith/</loc>
-  <lastmod>2017-10-31T04:51:00Z</lastmod>
- </url>
- <url>
-  <loc>https://j-jith.github.io/authors/roberto-alsina/</loc>
-  <lastmod>2017-10-31T04:51:00Z</lastmod>
+  <lastmod>2017-10-31T05:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://j-jith.github.io/categories/</loc>
-  <lastmod>2017-10-31T04:53:00Z</lastmod>
+  <lastmod>2017-10-31T05:44:00Z</lastmod>
  </url>
  <url>
   <loc>https://j-jith.github.io/categories/android/</loc>
   <lastmod>2017-10-31T04:53:00Z</lastmod>
  </url>
  <url>
-  <loc>https://j-jith.github.io/categories/blog/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
- </url>
- <url>
   <loc>https://j-jith.github.io/categories/cat_android/</loc>
   <lastmod>2017-10-31T04:53:00Z</lastmod>
  </url>
  <url>
-  <loc>https://j-jith.github.io/categories/cat_nikola/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
+  <loc>https://j-jith.github.io/categories/cat_misc/</loc>
+  <lastmod>2017-10-31T05:24:00Z</lastmod>
  </url>
  <url>
-  <loc>https://j-jith.github.io/categories/demo/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
+  <loc>https://j-jith.github.io/categories/cat_python/</loc>
+  <lastmod>2017-10-31T05:35:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/categories/cat_ubuntu/</loc>
+  <lastmod>2017-10-31T05:10:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/categories/iitm/</loc>
+  <lastmod>2017-10-31T05:35:00Z</lastmod>
  </url>
  <url>
   <loc>https://j-jith.github.io/categories/linux/</loc>
   <lastmod>2017-10-31T04:53:00Z</lastmod>
  </url>
  <url>
+  <loc>https://j-jith.github.io/categories/mac/</loc>
+  <lastmod>2017-10-31T05:24:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://j-jith.github.io/categories/miui/</loc>
   <lastmod>2017-10-31T04:53:00Z</lastmod>
  </url>
  <url>
-  <loc>https://j-jith.github.io/categories/nikola/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
+  <loc>https://j-jith.github.io/categories/osx/</loc>
+  <lastmod>2017-10-31T05:24:00Z</lastmod>
  </url>
  <url>
   <loc>https://j-jith.github.io/categories/python/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
+  <lastmod>2017-10-31T05:35:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/categories/redmi2/</loc>
+  <lastmod>2017-10-31T05:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/categories/ubuntu/</loc>
+  <lastmod>2017-10-31T05:10:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/categories/vim/</loc>
+  <lastmod>2017-10-31T05:10:00Z</lastmod>
  </url>
  <url>
   <loc>https://j-jith.github.io/galleries/</loc>
@@ -154,11 +158,23 @@
   <lastmod>2017-10-31T04:48:00Z</lastmod>
  </url>
  <url>
+  <loc>https://j-jith.github.io/posts/how-to-compile-and-install-vim-80-on-ubuntu/</loc>
+  <lastmod>2017-10-31T05:10:00Z</lastmod>
+ </url>
+ <url>
   <loc>https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/</loc>
   <lastmod>2017-10-31T04:51:00Z</lastmod>
  </url>
  <url>
-  <loc>https://j-jith.github.io/posts/welcome-to-nikola/</loc>
-  <lastmod>2017-10-31T04:48:00Z</lastmod>
+  <loc>https://j-jith.github.io/posts/installing-a-custom-rom-on-xiaomi-redmi-2/</loc>
+  <lastmod>2017-10-31T05:44:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/posts/letting-spotlight-find-brew-apps-on-mac-os-x/</loc>
+  <lastmod>2017-10-31T05:24:00Z</lastmod>
+ </url>
+ <url>
+  <loc>https://j-jith.github.io/posts/python-script-for-logging-in-to-iit-madras-netaccess/</loc>
+  <lastmod>2017-10-31T05:35:00Z</lastmod>
  </url>
 </urlset>

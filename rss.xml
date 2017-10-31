@@ -1,5 +1,288 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jithin's Blog</title><link>https://j-jith.github.io/</link><description>Jithin's Blog</description><atom:link rel="self" type="application/rss+xml" href="https://j-jith.github.io/rss.xml"></atom:link><language>en</language><copyright>Contents © 2017 &lt;a href="mailto:j.jith@outlook.com"&gt;Jithin Jith&lt;/a&gt; </copyright><lastBuildDate>Tue, 31 Oct 2017 04:54:44 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>How to flash MIUI Fastboot ROM from Linux</title><link>https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;ul class="simple"&gt;
+<?xml-stylesheet type="text/xsl" href="assets/xml/rss.xsl" media="all"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jithin's Blog</title><link>https://j-jith.github.io/</link><description>Jithin's Blog</description><atom:link type="application/rss+xml" rel="self" href="https://j-jith.github.io/rss.xml"></atom:link><language>en</language><copyright>Contents © 2017 &lt;a href="mailto:j.jith@outlook.com"&gt;Jithin Jith&lt;/a&gt; </copyright><lastBuildDate>Tue, 31 Oct 2017 05:48:06 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Installing a custom ROM on Xiaomi Redmi 2</title><link>https://j-jith.github.io/posts/installing-a-custom-rom-on-xiaomi-redmi-2/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been installing and testing a lot of custom ROMs recently on my Redmi 2.
+This is a brief tutorial describing all the steps involved in installing a
+custom ROM (with specific steps required for Redmi 2).&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Before proceeding, make sure you have backed up all your important data to
+another device.&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="section" id="custom-recovery"&gt;
+&lt;h2&gt;Custom Recovery&lt;/h2&gt;
+&lt;p&gt;Most custom ROMs require a custom recovery. In this section, I will provide the
+steps for installing the most popular recovery nowadays - &lt;a class="reference external" href="https://twrp.me"&gt;TWRP&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;First step is to install the &lt;em&gt;Android SDK platform tools&lt;/em&gt; which include the
+&lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; command. &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; is necessary for installing the custom
+recovery. You can get the platform tools for most OS &lt;a class="reference external" href="https://developer.android.com/studio/releases/platform-tools.html"&gt;here&lt;/a&gt;. If you
+are on Ubuntu, there is a very &lt;a class="reference external" href="https://packages.ubuntu.com/xenial/android-sdk-platform-tools"&gt;convenient package&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;If you have downloaded the platform tools manually, extract the archive to a
+directory of your choice, and open up your command line/terminal in the said
+directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Switch off your phone, and enter fastboot mode by pressing the volume down
+button and power button simultaneously. Connect the phone to your computer
+using a USB cable.&lt;/p&gt;
+&lt;p&gt;In your terminal, type &lt;tt class="docutils literal"&gt;fastboot devices&lt;/tt&gt; to make sure your phone is being
+detected. The output of the command should list your device. If not, check your
+USB cable connection. If it is still not being detected, you may have a broken
+USB port on your phone or a broken USB cable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Download the TWRP image from &lt;a class="reference external" href="https://dl.twrp.me/wt88047/"&gt;dl.twrp.me/wt88047/&lt;/a&gt;. (Note
+that the image is for &lt;strong&gt;wt88047&lt;/strong&gt; which includes the following models -
+&lt;strong&gt;20148(11/17/18/19)&lt;/strong&gt;. I'm not sure if this image works on &lt;strong&gt;wt86047
+(2014813)&lt;/strong&gt;. You can find an appropriate TWRP image on MIUI or XDA forums.
+Note down the path to where you have downloaded the image.) It will be
+convenient to copy it to your current working directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Now, flash the recovery using the following command:&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_0ca94bdfd9ca48cea4fa3e90ce810a02-1"&gt;&lt;/a&gt;fastboot flash recovery /path/to/twrp/image
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;If you restart your phone now, MIUI may rewrite your recovery. Instead, you
+should reboot directly to your new recovery once before rebooting to MIUI.
+This can be done by&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_9656cf5aef92473d969f60ab728b88ff-1"&gt;&lt;/a&gt;fastboot boot /path/to/twrp/image
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;That's it. You have successfully installed a custom recovery. You can now
+reboot into MIUI from the recovery.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="firmware"&gt;
+&lt;h2&gt;Firmware&lt;/h2&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;You have to ensure that your phone has the correct firmware version. Some
+(actually, most) ROMs require the Lollipop (Android 5.x) bootloader. If your
+MIUI is already on Lollipop, you can skip this section. If your MIUI is on
+Kitkat (Android 4.x) or lower, you need to flash the Lollipop bootloader. The
+requisite zip files can be found in the &lt;a class="reference external" href="https://forum.xda-developers.com/showpost.php?p=70328051&amp;amp;postcount=3"&gt;Lineage OS thread at XDA&lt;/a&gt; by
+&lt;em&gt;nicknitewolf&lt;/em&gt;. I'm reproducing the links here - &lt;a class="reference external" href="https://androidfilehost.com/?fid=673368273298919092"&gt;wt88047&lt;/a&gt;, &lt;a class="reference external" href="https://androidfilehost.com/?fid=385035244224408045"&gt;wt86047&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Copy the zip file onto your phone's SD card. Reboot to your custom recovery
+(Switch off your phone, and press volume up, volume down, and power buttons
+simultaneously). Choose the &lt;strong&gt;Install&lt;/strong&gt; option which will take you to a file
+browser. Find the zip file you just copied and select it. In the next screen,
+confirm that you want to flash this file. That's it. You have successfully
+updated your firmware.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;div class="section" id="rom"&gt;
+&lt;h2&gt;ROM&lt;/h2&gt;
+&lt;p&gt;Whichever custom ROM you have chosen should have detailed installation
+instructions. I will provide the &lt;em&gt;general&lt;/em&gt; steps involved in flashing a new ROM
+here.&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;Download the zip file for the ROM, and get the appropriate Google apps
+(GApps) from &lt;a class="reference external" href="http://opengapps.org/"&gt;opengapps.org&lt;/a&gt;. Copy both zip files to
+your phone's SD card. Reboot into recovery (power off, and press vol. up +
+vol. down + power).&lt;/li&gt;
+&lt;li&gt;Choose the &lt;strong&gt;Wipe&lt;/strong&gt; option in recovery. Choose the &lt;strong&gt;Advanced wipe&lt;/strong&gt; option
+in the next screen. In the following screen, select &lt;strong&gt;Dalvik/ART Cache,
+System, Data, and Cache&lt;/strong&gt;. Confirm that you want to wipe the selected
+partitions.&lt;/li&gt;
+&lt;li&gt;Next, go back to the home screen of your recovery, and choose the &lt;strong&gt;Install&lt;/strong&gt;
+option. In the file browser, find your &lt;strong&gt;ROM zip&lt;/strong&gt; and confirm its
+installation. Once the installation is done, choose &lt;strong&gt;Install&lt;/strong&gt; again, and
+select your &lt;strong&gt;GApps zip&lt;/strong&gt; in the file browser. Wait for the installation to
+finish, and reboot. You should now be greeted by the boot animation of your
+new ROM.&lt;/li&gt;
+&lt;li&gt;That's it. Enjoy your new ROM!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;&lt;/div&gt;</description><category>android</category><category>redmi2</category><guid>https://j-jith.github.io/posts/installing-a-custom-rom-on-xiaomi-redmi-2/</guid><pubDate>Tue, 31 Oct 2017 05:38:36 GMT</pubDate></item><item><title>Python script for logging in to IIT Madras netaccess</title><link>https://j-jith.github.io/posts/python-script-for-logging-in-to-iit-madras-netaccess/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;p&gt;This is a small python script which I wrote for easy login to netaccess at IIT
+Madras. The script is pretty self-explanatory. I wrote this when I was trying
+to learn the &lt;tt class="docutils literal"&gt;requests&lt;/tt&gt; module for python. The script uses the &lt;tt class="docutils literal"&gt;requests&lt;/tt&gt;
+module to communicate with the netaccess site. It also uses the user agent
+string of a browser to make the netaccess site think that it's dealing with a
+browser. Note that you can set a default username in &lt;tt class="docutils literal"&gt;get_login_data()&lt;/tt&gt;
+function. Set it to your roll number so that you don't have to enter it every
+time you call the script. The password has to be entered manually because I
+didn't want to store it in plain text.&lt;/p&gt;
+&lt;p&gt;PS: Remember to put the script in your &lt;tt class="docutils literal"&gt;$PATH&lt;/tt&gt; for ease of use.&lt;/p&gt;
+&lt;pre class="code python"&gt;&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-1"&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/usr/bin/env python&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-2"&gt;&lt;/a&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;__future__&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;print_function&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;division&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-3"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;requests&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-4"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;getpass&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-5"&gt;&lt;/a&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-6"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-7"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-8"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_login_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-9"&gt;&lt;/a&gt;    &lt;span class="sd"&gt;'''Asks the user for the username and password. Returns a dictionary to be&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-10"&gt;&lt;/a&gt;&lt;span class="sd"&gt;    passed to the /account/login post request.&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-11"&gt;&lt;/a&gt;&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-12"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-13"&gt;&lt;/a&gt;    &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter username (Empty input defaults to "am12d013"): '&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-14"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-15"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-16"&gt;&lt;/a&gt;        &lt;span class="n"&gt;username&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'am12d013'&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-17"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-18"&gt;&lt;/a&gt;    &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-19"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-20"&gt;&lt;/a&gt;    &lt;span class="k"&gt;while&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-21"&gt;&lt;/a&gt;        &lt;span class="n"&gt;password&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;getpass&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getpass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter password (Cannot be empty): '&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-22"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-23"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;#return {'username': username, 'password': password}&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-24"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'userLogin'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'userPassword'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-25"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-26"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-27"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;get_approve_data&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-28"&gt;&lt;/a&gt;    &lt;span class="sd"&gt;'''Asks the user for the duration to be logged in for. Returns a dictionary&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-29"&gt;&lt;/a&gt;&lt;span class="sd"&gt;    to be passed to the /account/approve post request.&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-30"&gt;&lt;/a&gt;&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-31"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-32"&gt;&lt;/a&gt;    &lt;span class="n"&gt;duration&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;input&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Enter session duration (1: 1 hour, 2: 1 day, empty defaults to 1): '&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-33"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-34"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="o"&gt;!=&lt;/span&gt;&lt;span class="s1"&gt;'2'&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-35"&gt;&lt;/a&gt;        &lt;span class="n"&gt;duration&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s1"&gt;'1'&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-36"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-37"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'1'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-38"&gt;&lt;/a&gt;        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'You have requested approval for 1 hour'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-39"&gt;&lt;/a&gt;    &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-40"&gt;&lt;/a&gt;        &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'You have requested approval for 1 day'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-41"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-42"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'duration'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;duration&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;'approveBtn'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;''&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-43"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-44"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-45"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;has_logged_in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-46"&gt;&lt;/a&gt;    &lt;span class="sd"&gt;'''Checks if login request is successful. Returns false if not.&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-47"&gt;&lt;/a&gt;&lt;span class="sd"&gt;    '''&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-48"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;# If response is not 200 OK, raise error&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-49"&gt;&lt;/a&gt;    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status_code&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;codes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ok&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-50"&gt;&lt;/a&gt;        &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raise_for_status&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-51"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;# Check if login has failed by searching for a substring in the response&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-52"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;# content&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-53"&gt;&lt;/a&gt;    &lt;span class="k"&gt;elif&lt;/span&gt; &lt;span class="s1"&gt;'/account/approve'&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;content&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-54"&gt;&lt;/a&gt;        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;False&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-55"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-56"&gt;&lt;/a&gt;    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="bp"&gt;True&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-57"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-58"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-59"&gt;&lt;/a&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-60"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-61"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;# User agent string from Firefox 49 running on a Linux machine&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-62"&gt;&lt;/a&gt;    &lt;span class="n"&gt;headers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;'User-Agent'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s1"&gt;'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0'&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-63"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-64"&gt;&lt;/a&gt;    &lt;span class="n"&gt;login_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_login_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-65"&gt;&lt;/a&gt;    &lt;span class="n"&gt;approve_data&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;get_approve_data&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-66"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-67"&gt;&lt;/a&gt;    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-68"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-69"&gt;&lt;/a&gt;        &lt;span class="c1"&gt;# Login request&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-70"&gt;&lt;/a&gt;        &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://netaccess.iitm.ac.in/account/login'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-71"&gt;&lt;/a&gt;                &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;login_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-72"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-73"&gt;&lt;/a&gt;        &lt;span class="c1"&gt;# Check if login is successful.&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-74"&gt;&lt;/a&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;has_logged_in&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-75"&gt;&lt;/a&gt;            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Login successful.'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-76"&gt;&lt;/a&gt;        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-77"&gt;&lt;/a&gt;            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Wrong username or password provided. Login failed!'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-78"&gt;&lt;/a&gt;            &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-79"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-80"&gt;&lt;/a&gt;        &lt;span class="c1"&gt;# Approve machine request&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-81"&gt;&lt;/a&gt;        &lt;span class="n"&gt;p&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'https://netaccess.iitm.ac.in/account/approve'&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-82"&gt;&lt;/a&gt;                &lt;span class="n"&gt;data&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;approve_data&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;headers&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-83"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-84"&gt;&lt;/a&gt;        &lt;span class="c1"&gt;# If response is not 200 OK, approval has failed. Exit.&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-85"&gt;&lt;/a&gt;        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;status_code&lt;/span&gt; &lt;span class="o"&gt;!=&lt;/span&gt; &lt;span class="n"&gt;requests&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;codes&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ok&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-86"&gt;&lt;/a&gt;            &lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;raise_for_status&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-87"&gt;&lt;/a&gt;        &lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-88"&gt;&lt;/a&gt;            &lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;'Machine approved successfully.'&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-89"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-90"&gt;&lt;/a&gt;        &lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exit&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-91"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-92"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-93"&gt;&lt;/a&gt;&lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="vm"&gt;__name__&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="s1"&gt;'__main__'&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-94"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-95"&gt;&lt;/a&gt;    &lt;span class="c1"&gt;# If python2.x, use 'raw_input' else use 'input'&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-96"&gt;&lt;/a&gt;    &lt;span class="k"&gt;try&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-97"&gt;&lt;/a&gt;        &lt;span class="nb"&gt;input&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;raw_input&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-98"&gt;&lt;/a&gt;    &lt;span class="k"&gt;except&lt;/span&gt; &lt;span class="ne"&gt;NameError&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-99"&gt;&lt;/a&gt;        &lt;span class="k"&gt;pass&lt;/span&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-100"&gt;&lt;/a&gt;
+&lt;a name="rest_code_c9c73e182e2d495fa86a528dab8ba298-101"&gt;&lt;/a&gt;    &lt;span class="n"&gt;main&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><category>iitm</category><category>python</category><guid>https://j-jith.github.io/posts/python-script-for-logging-in-to-iit-madras-netaccess/</guid><pubDate>Tue, 31 Oct 2017 05:25:56 GMT</pubDate></item><item><title>Letting Spotlight find Brew Apps on Mac OS X</title><link>https://j-jith.github.io/posts/letting-spotlight-find-brew-apps-on-mac-os-x/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;p&gt;Say, you want spotlight to find MacVim. Doing&lt;/p&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_575884c013ff4c2caf8176d3216b10c5-1"&gt;&lt;/a&gt;$ brew linkapps macvim
+&lt;/pre&gt;&lt;p&gt;creates a symlink in &lt;tt class="docutils literal"&gt;/Applications&lt;/tt&gt;. But Spotlight seems to ignore it. Instead, remove the symlink&lt;/p&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_80207cd961774893ad441005c54bb4d3-1"&gt;&lt;/a&gt;$ rm /Applications/MacVim.app
+&lt;/pre&gt;&lt;p&gt;and do&lt;/p&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_8852d4da4f104094a06d115774c0dda9-1"&gt;&lt;/a&gt;$ osascript -e &lt;span class="s1"&gt;'tell application "Finder" to make alias file to POSIX file "/usr/local/opt/macvim/MacVim.app" at POSIX file "/Applications"'&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><category>mac</category><category>osx</category><guid>https://j-jith.github.io/posts/letting-spotlight-find-brew-apps-on-mac-os-x/</guid><pubDate>Tue, 31 Oct 2017 05:22:05 GMT</pubDate></item><item><title>How to Compile and Install Vim 8.0 on Ubuntu</title><link>https://j-jith.github.io/posts/how-to-compile-and-install-vim-80-on-ubuntu/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Install build dependencies&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_627e2d1d25504bad8f2fc944e57e885e-1"&gt;&lt;/a&gt;$ sudo apt-get build-dep vim
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Clone git repo&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_8373cecdeefd4a2a8cd2234b1c6a1a03-1"&gt;&lt;/a&gt;$ git clone https://github.com/vim/vim.git&lt;span class="sb"&gt;``&lt;/span&gt;
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Change to src directory&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_7ad41960fd434de48f2fcb6340abe489-1"&gt;&lt;/a&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; vim/src
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Remove files from previous compilation (skip if compiling for the first time)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_ec54a657a6494864840576446a72eba1-1"&gt;&lt;/a&gt;$ sudo make distclean
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Path to install vim (optional. omit --prefix option in next step if not set)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_86ac9c17f723434699358024b13379cf-1"&gt;&lt;/a&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PREFIX&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;'/path/to/vim/install'&lt;/span&gt;
+&lt;/pre&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p class="first"&gt;Configure with required options (&lt;tt class="docutils literal"&gt;$ configure &lt;span class="pre"&gt;--help&lt;/span&gt;&lt;/tt&gt; for other config.
+options).&lt;/p&gt;
+&lt;ul class="simple"&gt;
+&lt;li&gt;For python 2.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-1"&gt;&lt;/a&gt;$ ./configure --with-features&lt;span class="o"&gt;=&lt;/span&gt;huge &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-2"&gt;&lt;/a&gt;            --enable-multibyte &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-3"&gt;&lt;/a&gt;            --enable-rubyinterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-4"&gt;&lt;/a&gt;            --enable-pythoninterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-5"&gt;&lt;/a&gt;            --with-python-config-dir&lt;span class="o"&gt;=&lt;/span&gt;/usr/lib/python2.7/config-x86&lt;span class="se"&gt;\_&lt;/span&gt;&lt;span class="m"&gt;64&lt;/span&gt;-linux-gnu &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-6"&gt;&lt;/a&gt;            --enable-perlinterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-7"&gt;&lt;/a&gt;            --enable-luainterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-8"&gt;&lt;/a&gt;            --enable-cscope &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-9"&gt;&lt;/a&gt;            --enable-gui&lt;span class="o"&gt;=&lt;/span&gt;auto &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-10"&gt;&lt;/a&gt;            --enable-gtk2-check &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-11"&gt;&lt;/a&gt;            --with-x &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-12"&gt;&lt;/a&gt;            --with-compiledby&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"j.jith"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_fa2aa6d0f4254d198517f8dddd779649-13"&gt;&lt;/a&gt;            --prefix&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;For python 3.x&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-1"&gt;&lt;/a&gt;$ ./configure --with-features&lt;span class="o"&gt;=&lt;/span&gt;huge &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-2"&gt;&lt;/a&gt;            --enable-multibyte &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-3"&gt;&lt;/a&gt;            --enable-rubyinterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-4"&gt;&lt;/a&gt;            --enable-python3interp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-5"&gt;&lt;/a&gt;            --with-python3-config-dir&lt;span class="o"&gt;=&lt;/span&gt;/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-6"&gt;&lt;/a&gt;            --enable-perlinterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-7"&gt;&lt;/a&gt;            --enable-luainterp &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-8"&gt;&lt;/a&gt;            --enable-cscope &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-9"&gt;&lt;/a&gt;            --enable-gui&lt;span class="o"&gt;=&lt;/span&gt;auto &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-10"&gt;&lt;/a&gt;            --enable-gtk2-check &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-11"&gt;&lt;/a&gt;            --with-x &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-12"&gt;&lt;/a&gt;            --with-compiledby&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;"j.jith"&lt;/span&gt; &lt;span class="se"&gt;\&lt;/span&gt;
+&lt;a name="rest_code_f44d296cc7f441a6a42152cd699ee399-13"&gt;&lt;/a&gt;            --prefix&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;
+&lt;/pre&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p class="first"&gt;Compile&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_329261b576674ae9b5d66957b8f8b809-1"&gt;&lt;/a&gt;$ make
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Run tests&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_205dee6cb7ac4b608f9fe1eba719a088-1"&gt;&lt;/a&gt;$ make &lt;span class="nb"&gt;test&lt;/span&gt;
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Install (may need to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; if you don't have write permission in &lt;tt class="docutils literal"&gt;$PREFIX&lt;/tt&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_25da80fd20114a3dae7d07488975fbad-1"&gt;&lt;/a&gt;$ make install
+&lt;/pre&gt;&lt;ul class="simple"&gt;
+&lt;li&gt;Make default editor/vim/vi/gvim&lt;/li&gt;
+&lt;/ul&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-1"&gt;&lt;/a&gt;$ sudo sh -c &lt;span class="s2"&gt;"update-alternatives --install /usr/bin/editor editor &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/vim 1;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-2"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --set editor &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/vim;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-3"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --install /usr/bin/vim vim &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/vim 1;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-4"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --set vim &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/vim;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-5"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --install /usr/bin/vi vi &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/vim 1;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-6"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --set vi &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/vim;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-7"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --install /usr/bin/gvim gvim &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/gvim 1;&lt;/span&gt;
+&lt;a name="rest_code_52b526a4e30a4ed683079bc12ab2abb4-8"&gt;&lt;/a&gt;&lt;span class="s2"&gt;update-alternatives --set gvim &lt;/span&gt;&lt;span class="nv"&gt;$PREFIX&lt;/span&gt;&lt;span class="s2"&gt;/bin/gvim"&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</description><category>linux</category><category>ubuntu</category><category>vim</category><guid>https://j-jith.github.io/posts/how-to-compile-and-install-vim-80-on-ubuntu/</guid><pubDate>Tue, 31 Oct 2017 05:10:07 GMT</pubDate></item><item><title>How to flash MIUI Fastboot ROM from Linux</title><link>https://j-jith.github.io/posts/how-to-flash-miui-fastboot-rom-from-linux/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;Download the ROM suitable for your device from the &lt;a class="reference external" href="http://en.miui.com/a-234.html"&gt;MIUI
 site&lt;/a&gt; and extract the downloaded archive&lt;/li&gt;
 &lt;li&gt;Download and extract the &lt;a class="reference external" href="https://developer.android.com/studio/releases/platform-tools.html"&gt;Android SDK Platform Tools&lt;/a&gt;&lt;/li&gt;
