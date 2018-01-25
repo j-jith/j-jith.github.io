@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jithin Jith (Posts about android)</title><link>https://j-jith.github.io/</link><description></description><atom:link href="https://j-jith.github.io/categories/cat_android.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:"&gt;Jithin Jith&lt;/a&gt; </copyright><lastBuildDate>Thu, 25 Jan 2018 03:53:52 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Installing a custom ROM on Xiaomi Redmi 2</title><link>https://j-jith.github.io/blog/installing-a-custom-rom-on-xiaomi-redmi-2/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been installing and testing a lot of custom ROMs recently on my Redmi 2.
+<?xml-stylesheet type="text/xsl" href="../assets/xml/rss.xsl" media="all"?><rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Jithin Jith (Posts about android)</title><link>https://j-jith.github.io/</link><description></description><atom:link href="https://j-jith.github.io/categories/cat_android.xml" rel="self" type="application/rss+xml"></atom:link><language>en</language><copyright>Contents © 2018 &lt;a href="mailto:"&gt;Jithin Jith&lt;/a&gt; </copyright><lastBuildDate>Thu, 25 Jan 2018 06:01:58 GMT</lastBuildDate><generator>Nikola (getnikola.com)</generator><docs>http://blogs.law.harvard.edu/tech/rss</docs><item><title>Installing a custom ROM on Xiaomi Redmi 2</title><link>https://j-jith.github.io/blog/installing-a-custom-rom-on-xiaomi-redmi-2/</link><dc:creator>Jithin Jith</dc:creator><description>&lt;div&gt;&lt;p&gt;I've been installing and testing a lot of custom ROMs recently on my Redmi 2.
 This is a brief tutorial describing all the steps involved in installing a
 custom ROM (with specific steps required for Redmi 2).&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Before proceeding, make sure you have backed up all your important data to
@@ -35,13 +35,13 @@ convenient to copy it to your current working directory.&lt;/p&gt;
 &lt;li&gt;&lt;p class="first"&gt;Now, flash the recovery using the following command:&lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_4add91323c8c42159d45426ca28e0c64-1"&gt;&lt;/a&gt;fastboot flash recovery /path/to/twrp/image
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_35deda2ed5e24297aef33ff9f1f81568-1"&gt;&lt;/a&gt;fastboot flash recovery /path/to/twrp/image
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;If you restart your phone now, MIUI may rewrite your recovery. Instead, you
 should reboot directly to your new recovery once before rebooting to MIUI.
 This can be done by&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_001d72254b4d451297bbef318e34f9ef-1"&gt;&lt;/a&gt;fastboot boot /path/to/twrp/image
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_f02231fddf8444cc883876c06d9ec3b1-1"&gt;&lt;/a&gt;fastboot boot /path/to/twrp/image
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;That's it. You have successfully installed a custom recovery. You can now
 reboot into MIUI from the recovery.&lt;/li&gt;
@@ -93,20 +93,20 @@ site&lt;/a&gt; and extract the downloaded archive&lt;/li&gt;
 &lt;li&gt;Make sure &lt;tt class="docutils literal"&gt;adb&lt;/tt&gt; and &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; (components of platform-tools) are in your
 path&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_fa1980dc00784f24b385c17773c458d9-1"&gt;&lt;/a&gt;$ &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;path/to/android/sdk/platform-tools:&lt;span class="nv"&gt;$PATH&lt;/span&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_527f0071d70a4caa8bc75776d29dc671-1"&gt;&lt;/a&gt;$ &lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;path/to/android/sdk/platform-tools:&lt;span class="nv"&gt;$PATH&lt;/span&gt;
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;Connect your device to your computer using a USB cable and enable &lt;em&gt;USB
 Debugging&lt;/em&gt; in your device's settings. Check if your device is detected.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_ff9621b406fc4babb224dff2c0f3c014-1"&gt;&lt;/a&gt;$ adb devices
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_b4447aa569e848daa5de9eddf3f7e5e7-1"&gt;&lt;/a&gt;$ adb devices
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;If device is listed, reboot to bootloader&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_809138906469455881962555a88c82dd-1"&gt;&lt;/a&gt;$ adb reboot bootloader
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_cdab5025bfbb46348bf617b75aee783e-1"&gt;&lt;/a&gt;$ adb reboot bootloader
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;Check if your device is detected by fastboot&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_b86b79788fb3419eab48b8d2e12fd27e-1"&gt;&lt;/a&gt;$ fastboot devices
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_f8af3abd93184c159b57d7e6716b5336-1"&gt;&lt;/a&gt;$ fastboot devices
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;You may need to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; before &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt; if you get a permission denied
 error&lt;/li&gt;
@@ -118,17 +118,17 @@ error&lt;/li&gt;
 &lt;li&gt;Whichever script you decide to use, make sure that the interpreter is
 mentioned at the top of the script like&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_6c4cbfcc863644a58c179138655a558f-1"&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_cfae4466a7914e9eaa5eaf117f72f1f7-1"&gt;&lt;/a&gt;&lt;span class="ch"&gt;#!/bin/sh&lt;/span&gt;
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;If the above line is missing, add it to the top of the script&lt;/li&gt;
 &lt;li&gt;Make the script executable (I've chosen &lt;tt class="docutils literal"&gt;flash_all.sh&lt;/tt&gt;)&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_aa0d30e3488c4610ae9e9b689018afa2-1"&gt;&lt;/a&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; path/to/extracted/ROM/archive
-&lt;a name="rest_code_aa0d30e3488c4610ae9e9b689018afa2-2"&gt;&lt;/a&gt;$ chmod a+x ./flash_all.sh
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_2e864dcf6c1348f1a8582f91efda5d0d-1"&gt;&lt;/a&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; path/to/extracted/ROM/archive
+&lt;a name="rest_code_2e864dcf6c1348f1a8582f91efda5d0d-2"&gt;&lt;/a&gt;$ chmod a+x ./flash_all.sh
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;Run the script&lt;/li&gt;
 &lt;/ul&gt;
-&lt;pre class="code bash"&gt;&lt;a name="rest_code_32c4de6bb27d46bab3dc1af7e2e4c4db-1"&gt;&lt;/a&gt;$ ./flash_all.sh
+&lt;pre class="code bash"&gt;&lt;a name="rest_code_12629f485fbf46c9b95a2f4cb33fc80b-1"&gt;&lt;/a&gt;$ ./flash_all.sh
 &lt;/pre&gt;&lt;ul class="simple"&gt;
 &lt;li&gt;You may need to run &lt;tt class="docutils literal"&gt;sudo ./flash_all.sh&lt;/tt&gt; if you had to use &lt;tt class="docutils literal"&gt;sudo&lt;/tt&gt; with &lt;tt class="docutils literal"&gt;fastboot&lt;/tt&gt;&lt;/li&gt;
 &lt;li&gt;Sit back and relax. The script needs no user interaction. After flashing the

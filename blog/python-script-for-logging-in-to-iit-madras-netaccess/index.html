@@ -11,7 +11,8 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="canonical" href="https://j-jith.github.io/blog/python-script-for-logging-in-to-iit-madras-netaccess/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
+<link rel="icon" href="../../favicon.ico" sizes="16x16">
+<!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
 <link rel="prev" href="../letting-spotlight-find-brew-apps-on-mac-os-x/" title="Letting Spotlight find Brew Apps on Mac OS X" type="text/html">
 <link rel="next" href="../installing-a-custom-rom-on-xiaomi-redmi-2/" title="Installing a custom ROM on Xiaomi Redmi 2" type="text/html">
 <meta property="og:site_name" content="Jithin Jith">
@@ -78,107 +79,107 @@ function. Set it to your roll number so that you don't have to enter it every
 time you call the script. The password has to be entered manually because I
 didn't want to store it in plain text.</p>
 <p>PS: Remember to put the script in your <tt class="docutils literal">$PATH</tt> for ease of use.</p>
-<pre class="code python"><a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-1"></a><span class="ch">#!/usr/bin/env python</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-2"></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-3"></a><span class="kn">import</span> <span class="nn">requests</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-4"></a><span class="kn">import</span> <span class="nn">getpass</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-5"></a><span class="kn">import</span> <span class="nn">sys</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-6"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-7"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-8"></a><span class="k">def</span> <span class="nf">get_login_data</span><span class="p">():</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-9"></a>    <span class="sd">'''Asks the user for the username and password. Returns a dictionary to be</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-10"></a><span class="sd">    passed to the /account/login post request.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-11"></a><span class="sd">    '''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-12"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-13"></a>    <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter username (Empty input defaults to "am12d013"): '</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-14"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-15"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-16"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s1">'am12d013'</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-17"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-18"></a>    <span class="n">password</span> <span class="o">=</span> <span class="s1">''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-19"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-20"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-21"></a>        <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">'Enter password (Cannot be empty): '</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-22"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-23"></a>    <span class="c1">#return {'username': username, 'password': password}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-24"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'userLogin'</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">'userPassword'</span><span class="p">:</span> <span class="n">password</span><span class="p">}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-25"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-26"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-27"></a><span class="k">def</span> <span class="nf">get_approve_data</span><span class="p">():</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-28"></a>    <span class="sd">'''Asks the user for the duration to be logged in for. Returns a dictionary</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-29"></a><span class="sd">    to be passed to the /account/approve post request.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-30"></a><span class="sd">    '''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-31"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-32"></a>    <span class="n">duration</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter session duration (1: 1 hour, 2: 1 day, empty defaults to 1): '</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-33"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-34"></a>    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">duration</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">duration</span><span class="o">!=</span><span class="s1">'2'</span><span class="p">):</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-35"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="s1">'1'</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-36"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-37"></a>    <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-38"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 hour'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-39"></a>    <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-40"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 day'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-41"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-42"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'duration'</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s1">'approveBtn'</span><span class="p">:</span> <span class="s1">''</span><span class="p">}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-43"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-44"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-45"></a><span class="k">def</span> <span class="nf">has_logged_in</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-46"></a>    <span class="sd">'''Checks if login request is successful. Returns false if not.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-47"></a><span class="sd">    '''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-48"></a>    <span class="c1"># If response is not 200 OK, raise error</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-49"></a>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-50"></a>        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-51"></a>    <span class="c1"># Check if login has failed by searching for a substring in the response</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-52"></a>    <span class="c1"># content</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-53"></a>    <span class="k">elif</span> <span class="s1">'/account/approve'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-54"></a>        <span class="k">return</span> <span class="bp">False</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-55"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-56"></a>    <span class="k">return</span> <span class="bp">True</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-57"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-58"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-59"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-60"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-61"></a>    <span class="c1"># User agent string from Firefox 49 running on a Linux machine</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-62"></a>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span><span class="p">:</span> <span class="s1">'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0'</span><span class="p">}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-63"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-64"></a>    <span class="n">login_data</span> <span class="o">=</span> <span class="n">get_login_data</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-65"></a>    <span class="n">approve_data</span> <span class="o">=</span> <span class="n">get_approve_data</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-66"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-67"></a>    <span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-68"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-69"></a>        <span class="c1"># Login request</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-70"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/login'</span><span class="p">,</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-71"></a>                <span class="n">data</span><span class="o">=</span><span class="n">login_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-72"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-73"></a>        <span class="c1"># Check if login is successful.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-74"></a>        <span class="k">if</span> <span class="n">has_logged_in</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-75"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Login successful.'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-76"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-77"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Wrong username or password provided. Login failed!'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-78"></a>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-79"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-80"></a>        <span class="c1"># Approve machine request</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-81"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/approve'</span><span class="p">,</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-82"></a>                <span class="n">data</span><span class="o">=</span><span class="n">approve_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-83"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-84"></a>        <span class="c1"># If response is not 200 OK, approval has failed. Exit.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-85"></a>        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-86"></a>            <span class="n">p</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-87"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-88"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Machine approved successfully.'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-89"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-90"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-91"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-92"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-93"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-94"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-95"></a>    <span class="c1"># If python2.x, use 'raw_input' else use 'input'</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-96"></a>    <span class="k">try</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-97"></a>        <span class="nb">input</span> <span class="o">=</span> <span class="nb">raw_input</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-98"></a>    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-99"></a>        <span class="k">pass</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-100"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-101"></a>    <span class="n">main</span><span class="p">()</span>
+<pre class="code python"><a name="rest_code_891db6f530154540b1f8982fe89f9fea-1"></a><span class="ch">#!/usr/bin/env python</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-2"></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-3"></a><span class="kn">import</span> <span class="nn">requests</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-4"></a><span class="kn">import</span> <span class="nn">getpass</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-5"></a><span class="kn">import</span> <span class="nn">sys</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-6"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-7"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-8"></a><span class="k">def</span> <span class="nf">get_login_data</span><span class="p">():</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-9"></a>    <span class="sd">'''Asks the user for the username and password. Returns a dictionary to be</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-10"></a><span class="sd">    passed to the /account/login post request.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-11"></a><span class="sd">    '''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-12"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-13"></a>    <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter username (Empty input defaults to "am12d013"): '</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-14"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-15"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-16"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s1">'am12d013'</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-17"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-18"></a>    <span class="n">password</span> <span class="o">=</span> <span class="s1">''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-19"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-20"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-21"></a>        <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">'Enter password (Cannot be empty): '</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-22"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-23"></a>    <span class="c1">#return {'username': username, 'password': password}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-24"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'userLogin'</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">'userPassword'</span><span class="p">:</span> <span class="n">password</span><span class="p">}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-25"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-26"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-27"></a><span class="k">def</span> <span class="nf">get_approve_data</span><span class="p">():</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-28"></a>    <span class="sd">'''Asks the user for the duration to be logged in for. Returns a dictionary</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-29"></a><span class="sd">    to be passed to the /account/approve post request.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-30"></a><span class="sd">    '''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-31"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-32"></a>    <span class="n">duration</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter session duration (1: 1 hour, 2: 1 day, empty defaults to 1): '</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-33"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-34"></a>    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">duration</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">duration</span><span class="o">!=</span><span class="s1">'2'</span><span class="p">):</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-35"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="s1">'1'</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-36"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-37"></a>    <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-38"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 hour'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-39"></a>    <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-40"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 day'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-41"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-42"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'duration'</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s1">'approveBtn'</span><span class="p">:</span> <span class="s1">''</span><span class="p">}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-43"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-44"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-45"></a><span class="k">def</span> <span class="nf">has_logged_in</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-46"></a>    <span class="sd">'''Checks if login request is successful. Returns false if not.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-47"></a><span class="sd">    '''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-48"></a>    <span class="c1"># If response is not 200 OK, raise error</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-49"></a>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-50"></a>        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-51"></a>    <span class="c1"># Check if login has failed by searching for a substring in the response</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-52"></a>    <span class="c1"># content</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-53"></a>    <span class="k">elif</span> <span class="s1">'/account/approve'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-54"></a>        <span class="k">return</span> <span class="bp">False</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-55"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-56"></a>    <span class="k">return</span> <span class="bp">True</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-57"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-58"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-59"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-60"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-61"></a>    <span class="c1"># User agent string from Firefox 49 running on a Linux machine</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-62"></a>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span><span class="p">:</span> <span class="s1">'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0'</span><span class="p">}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-63"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-64"></a>    <span class="n">login_data</span> <span class="o">=</span> <span class="n">get_login_data</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-65"></a>    <span class="n">approve_data</span> <span class="o">=</span> <span class="n">get_approve_data</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-66"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-67"></a>    <span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-68"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-69"></a>        <span class="c1"># Login request</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-70"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/login'</span><span class="p">,</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-71"></a>                <span class="n">data</span><span class="o">=</span><span class="n">login_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-72"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-73"></a>        <span class="c1"># Check if login is successful.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-74"></a>        <span class="k">if</span> <span class="n">has_logged_in</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-75"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Login successful.'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-76"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-77"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Wrong username or password provided. Login failed!'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-78"></a>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-79"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-80"></a>        <span class="c1"># Approve machine request</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-81"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/approve'</span><span class="p">,</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-82"></a>                <span class="n">data</span><span class="o">=</span><span class="n">approve_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-83"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-84"></a>        <span class="c1"># If response is not 200 OK, approval has failed. Exit.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-85"></a>        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-86"></a>            <span class="n">p</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-87"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-88"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Machine approved successfully.'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-89"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-90"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-91"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-92"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-93"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-94"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-95"></a>    <span class="c1"># If python2.x, use 'raw_input' else use 'input'</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-96"></a>    <span class="k">try</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-97"></a>        <span class="nb">input</span> <span class="o">=</span> <span class="nb">raw_input</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-98"></a>    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-99"></a>        <span class="k">pass</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-100"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-101"></a>    <span class="n">main</span><span class="p">()</span>
 </pre>
 </div>
     </div>
@@ -240,7 +241,7 @@ didn't want to store it in plain text.</p>
 -->
     <!--%endif-->
     <link href="../../assets/css/duoshuo.css" type="text/css" rel="stylesheet">
-<script src="../../assets/js/jquery.min.js"></script><script src="../../assets/js/bootstrap.min.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><script src="../../assets/js/fancydates.js"></script><script src="../../assets/js/jquery.colorbox-min.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/jquery-colorbox@1.6.4/jquery.colorbox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.20.1/moment.min.js"></script><script src="../../assets/js/fancydates.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
     moment.locale("en");
     fancydates(0, "YYYY-MM-DD HH:mm");
     </script><!-- end fancy dates -->

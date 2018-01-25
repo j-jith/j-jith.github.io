@@ -11,7 +11,8 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="canonical" href="https://j-jith.github.io/blog/how-to-compile-and-install-vim-80-on-ubuntu/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
+<link rel="icon" href="../../favicon.ico" sizes="16x16">
+<!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
 <link rel="prev" href="../how-to-flash-miui-fastboot-rom-from-linux/" title="How to flash MIUI Fastboot ROM from Linux" type="text/html">
 <link rel="next" href="../letting-spotlight-find-brew-apps-on-mac-os-x/" title="Letting Spotlight find Brew Apps on Mac OS X" type="text/html">
 <meta property="og:site_name" content="Jithin Jith">
@@ -82,27 +83,27 @@ Remove files from previous compilation (s">
 <ul class="simple">
 <li>Install build dependencies</li>
 </ul>
-<pre class="code bash"><a name="rest_code_4c6974467b5844eea2020701016e91ce-1"></a>$ sudo apt-get build-dep vim
+<pre class="code bash"><a name="rest_code_07507ff92c4f498e8c820256b0dafc16-1"></a>$ sudo apt-get build-dep vim
 </pre>
 <ul class="simple">
 <li>Clone git repo</li>
 </ul>
-<pre class="code bash"><a name="rest_code_86b57445fb284171a3a1b17b41e34cae-1"></a>$ git clone https://github.com/vim/vim.git<span class="sb">``</span>
+<pre class="code bash"><a name="rest_code_24c1844b28b34f4b84970188d609e6d6-1"></a>$ git clone https://github.com/vim/vim.git<span class="sb">``</span>
 </pre>
 <ul class="simple">
 <li>Change to src directory</li>
 </ul>
-<pre class="code bash"><a name="rest_code_e4e5e67a68cc4a2f9850a5620f5d2894-1"></a>$ <span class="nb">cd</span> vim/src
+<pre class="code bash"><a name="rest_code_69af3599583547c080136e00224c6af2-1"></a>$ <span class="nb">cd</span> vim/src
 </pre>
 <ul class="simple">
 <li>Remove files from previous compilation (skip if compiling for the first time)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_c881584c4d3e4030bf45b81bfefd29ac-1"></a>$ sudo make distclean
+<pre class="code bash"><a name="rest_code_42829c836dbb4caeb338f4f75f788125-1"></a>$ sudo make distclean
 </pre>
 <ul class="simple">
 <li>Path to install vim (optional. omit --prefix option in next step if not set)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_ad00d254a0e0487fb9d97bfb0a56dc97-1"></a><span class="nb">export</span> <span class="nv">PREFIX</span><span class="o">=</span><span class="s1">'/path/to/vim/install'</span>
+<pre class="code bash"><a name="rest_code_c98e17ef094d4e0cbd7647354e48b48e-1"></a><span class="nb">export</span> <span class="nv">PREFIX</span><span class="o">=</span><span class="s1">'/path/to/vim/install'</span>
 </pre>
 <ul>
 <li>
@@ -111,65 +112,65 @@ options).</p>
 <ul class="simple">
 <li>For python 2.x</li>
 </ul>
-<pre class="code bash"><a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-2"></a>            --enable-multibyte <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-3"></a>            --enable-rubyinterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-4"></a>            --enable-pythoninterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-5"></a>            --with-python-config-dir<span class="o">=</span>/usr/lib/python2.7/config-x86<span class="se">\_</span><span class="m">64</span>-linux-gnu <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-6"></a>            --enable-perlinterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-7"></a>            --enable-luainterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-8"></a>            --enable-cscope <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-10"></a>            --enable-gtk2-check <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-11"></a>            --with-x <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
+<pre class="code bash"><a name="rest_code_12307b5a10ca47059fac02da3f191cad-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-2"></a>            --enable-multibyte <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-3"></a>            --enable-rubyinterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-4"></a>            --enable-pythoninterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-5"></a>            --with-python-config-dir<span class="o">=</span>/usr/lib/python2.7/config-x86<span class="se">\_</span><span class="m">64</span>-linux-gnu <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-6"></a>            --enable-perlinterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-7"></a>            --enable-luainterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-8"></a>            --enable-cscope <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-10"></a>            --enable-gtk2-check <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-11"></a>            --with-x <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
 </pre>
 <ul class="simple">
 <li>For python 3.x</li>
 </ul>
-<pre class="code bash"><a name="rest_code_58a035be74354811b0f77c7fa44f9806-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-2"></a>            --enable-multibyte <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-3"></a>            --enable-rubyinterp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-4"></a>            --enable-python3interp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-5"></a>            --with-python3-config-dir<span class="o">=</span>/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-6"></a>            --enable-perlinterp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-7"></a>            --enable-luainterp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-8"></a>            --enable-cscope <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-10"></a>            --enable-gtk2-check <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-11"></a>            --with-x <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
+<pre class="code bash"><a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-2"></a>            --enable-multibyte <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-3"></a>            --enable-rubyinterp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-4"></a>            --enable-python3interp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-5"></a>            --with-python3-config-dir<span class="o">=</span>/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-6"></a>            --enable-perlinterp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-7"></a>            --enable-luainterp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-8"></a>            --enable-cscope <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-10"></a>            --enable-gtk2-check <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-11"></a>            --with-x <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
 </pre>
 </li>
 <li>
 <p class="first">Compile</p>
 </li>
 </ul>
-<pre class="code bash"><a name="rest_code_97c13bc2ef6c480db4b920591db3d624-1"></a>$ make
+<pre class="code bash"><a name="rest_code_6934e667fe144a3bbabbd9a2a25ca84e-1"></a>$ make
 </pre>
 <ul class="simple">
 <li>Run tests</li>
 </ul>
-<pre class="code bash"><a name="rest_code_44522e36b7234de2bda92cc7214eebf8-1"></a>$ make <span class="nb">test</span>
+<pre class="code bash"><a name="rest_code_62dda20e77124e1db1be7f696b5bc3a5-1"></a>$ make <span class="nb">test</span>
 </pre>
 <ul class="simple">
 <li>Install (may need to use <tt class="docutils literal">sudo</tt> if you don't have write permission in <tt class="docutils literal">$PREFIX</tt>)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_ca755540e504451ab65b21906872865e-1"></a>$ make install
+<pre class="code bash"><a name="rest_code_9026a994948641b7b9aa5f7d3b536985-1"></a>$ make install
 </pre>
 <ul class="simple">
 <li>Make default editor/vim/vi/gvim</li>
 </ul>
-<pre class="code bash"><a name="rest_code_87549b942d0847b4ac9534db849e6d0d-1"></a>$ sudo sh -c <span class="s2">"update-alternatives --install /usr/bin/editor editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-2"></a><span class="s2">update-alternatives --set editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-3"></a><span class="s2">update-alternatives --install /usr/bin/vim vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-4"></a><span class="s2">update-alternatives --set vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-5"></a><span class="s2">update-alternatives --install /usr/bin/vi vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-6"></a><span class="s2">update-alternatives --set vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-7"></a><span class="s2">update-alternatives --install /usr/bin/gvim gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-8"></a><span class="s2">update-alternatives --set gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim"</span>
+<pre class="code bash"><a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-1"></a>$ sudo sh -c <span class="s2">"update-alternatives --install /usr/bin/editor editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-2"></a><span class="s2">update-alternatives --set editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-3"></a><span class="s2">update-alternatives --install /usr/bin/vim vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-4"></a><span class="s2">update-alternatives --set vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-5"></a><span class="s2">update-alternatives --install /usr/bin/vi vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-6"></a><span class="s2">update-alternatives --set vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-7"></a><span class="s2">update-alternatives --install /usr/bin/gvim gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-8"></a><span class="s2">update-alternatives --set gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim"</span>
 </pre>
 </div>
     </div>
@@ -232,7 +233,7 @@ options).</p>
 -->
     <!--%endif-->
     <link href="../../assets/css/duoshuo.css" type="text/css" rel="stylesheet">
-<script src="../../assets/js/jquery.min.js"></script><script src="../../assets/js/bootstrap.min.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><script src="../../assets/js/fancydates.js"></script><script src="../../assets/js/jquery.colorbox-min.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/jquery-colorbox@1.6.4/jquery.colorbox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.20.1/moment.min.js"></script><script src="../../assets/js/fancydates.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
     moment.locale("en");
     fancydates(0, "YYYY-MM-DD HH:mm");
     </script><!-- end fancy dates -->

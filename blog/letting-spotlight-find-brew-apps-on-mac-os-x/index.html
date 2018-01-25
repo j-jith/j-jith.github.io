@@ -11,7 +11,8 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
 <link rel="canonical" href="https://j-jith.github.io/blog/letting-spotlight-find-brew-apps-on-mac-os-x/">
-<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
+<link rel="icon" href="../../favicon.ico" sizes="16x16">
+<!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
 <link rel="prev" href="../how-to-compile-and-install-vim-80-on-ubuntu/" title="How to Compile and Install Vim 8.0 on Ubuntu" type="text/html">
 <link rel="next" href="../python-script-for-logging-in-to-iit-madras-netaccess/" title="Python script for logging in to IIT Madras netaccess" type="text/html">
 <meta property="og:site_name" content="Jithin Jith">
@@ -71,13 +72,13 @@ and">
     <div class="post-content">
         <div>
 <p>Say, you want spotlight to find MacVim. Doing</p>
-<pre class="code bash"><a name="rest_code_877435f0bd11429792e5826105bc8782-1"></a>$ brew linkapps macvim
+<pre class="code bash"><a name="rest_code_e2f978d78f5a47b79824eaffebb77c5a-1"></a>$ brew linkapps macvim
 </pre>
 <p>creates a symlink in <tt class="docutils literal">/Applications</tt>. But Spotlight seems to ignore it. Instead, remove the symlink</p>
-<pre class="code bash"><a name="rest_code_78237d4808054299b3c081c7a82f1bbd-1"></a>$ rm /Applications/MacVim.app
+<pre class="code bash"><a name="rest_code_913de303055344bb920b3bc6d9d90d32-1"></a>$ rm /Applications/MacVim.app
 </pre>
 <p>and do</p>
-<pre class="code bash"><a name="rest_code_17d418c872da454fbff8f035a407efd0-1"></a>$ osascript -e <span class="s1">'tell application "Finder" to make alias file to POSIX file "/usr/local/opt/macvim/MacVim.app" at POSIX file "/Applications"'</span>
+<pre class="code bash"><a name="rest_code_fe2f3e215a9b4442abf2a1a571a0bba8-1"></a>$ osascript -e <span class="s1">'tell application "Finder" to make alias file to POSIX file "/usr/local/opt/macvim/MacVim.app" at POSIX file "/Applications"'</span>
 </pre>
 </div>
     </div>
@@ -139,7 +140,7 @@ and">
 -->
     <!--%endif-->
     <link href="../../assets/css/duoshuo.css" type="text/css" rel="stylesheet">
-<script src="../../assets/js/jquery.min.js"></script><script src="../../assets/js/bootstrap.min.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><script src="../../assets/js/fancydates.js"></script><script src="../../assets/js/jquery.colorbox-min.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/jquery-colorbox@1.6.4/jquery.colorbox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.20.1/moment.min.js"></script><script src="../../assets/js/fancydates.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
     moment.locale("en");
     fancydates(0, "YYYY-MM-DD HH:mm");
     </script><!-- end fancy dates -->

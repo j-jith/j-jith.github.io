@@ -12,7 +12,8 @@
 <meta name="generator" content="Nikola (getnikola.com)">
 <link rel="alternate" type="application/rss+xml" title="RSS" href="../rss.xml">
 <link rel="canonical" href="https://j-jith.github.io/blog/">
-<!--[if lt IE 9]><script src="../assets/js/html5.js"></script><![endif]-->
+<link rel="icon" href="../favicon.ico" sizes="16x16">
+<!--[if lt IE 9]><script src="https://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 </head>
 <body>
 <div class="body_container">
@@ -104,14 +105,14 @@ convenient to copy it to your current working directory.</p>
 <p class="first">Now, flash the recovery using the following command:</p>
 </li>
 </ul>
-<pre class="code bash"><a name="rest_code_4add91323c8c42159d45426ca28e0c64-1"></a>fastboot flash recovery /path/to/twrp/image
+<pre class="code bash"><a name="rest_code_35deda2ed5e24297aef33ff9f1f81568-1"></a>fastboot flash recovery /path/to/twrp/image
 </pre>
 <ul class="simple">
 <li>If you restart your phone now, MIUI may rewrite your recovery. Instead, you
 should reboot directly to your new recovery once before rebooting to MIUI.
 This can be done by</li>
 </ul>
-<pre class="code bash"><a name="rest_code_001d72254b4d451297bbef318e34f9ef-1"></a>fastboot boot /path/to/twrp/image
+<pre class="code bash"><a name="rest_code_f02231fddf8444cc883876c06d9ec3b1-1"></a>fastboot boot /path/to/twrp/image
 </pre>
 <ul class="simple">
 <li>That's it. You have successfully installed a custom recovery. You can now
@@ -181,107 +182,107 @@ function. Set it to your roll number so that you don't have to enter it every
 time you call the script. The password has to be entered manually because I
 didn't want to store it in plain text.</p>
 <p>PS: Remember to put the script in your <tt class="docutils literal">$PATH</tt> for ease of use.</p>
-<pre class="code python"><a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-1"></a><span class="ch">#!/usr/bin/env python</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-2"></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-3"></a><span class="kn">import</span> <span class="nn">requests</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-4"></a><span class="kn">import</span> <span class="nn">getpass</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-5"></a><span class="kn">import</span> <span class="nn">sys</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-6"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-7"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-8"></a><span class="k">def</span> <span class="nf">get_login_data</span><span class="p">():</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-9"></a>    <span class="sd">'''Asks the user for the username and password. Returns a dictionary to be</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-10"></a><span class="sd">    passed to the /account/login post request.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-11"></a><span class="sd">    '''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-12"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-13"></a>    <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter username (Empty input defaults to "am12d013"): '</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-14"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-15"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-16"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s1">'am12d013'</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-17"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-18"></a>    <span class="n">password</span> <span class="o">=</span> <span class="s1">''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-19"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-20"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-21"></a>        <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">'Enter password (Cannot be empty): '</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-22"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-23"></a>    <span class="c1">#return {'username': username, 'password': password}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-24"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'userLogin'</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">'userPassword'</span><span class="p">:</span> <span class="n">password</span><span class="p">}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-25"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-26"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-27"></a><span class="k">def</span> <span class="nf">get_approve_data</span><span class="p">():</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-28"></a>    <span class="sd">'''Asks the user for the duration to be logged in for. Returns a dictionary</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-29"></a><span class="sd">    to be passed to the /account/approve post request.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-30"></a><span class="sd">    '''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-31"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-32"></a>    <span class="n">duration</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter session duration (1: 1 hour, 2: 1 day, empty defaults to 1): '</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-33"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-34"></a>    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">duration</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">duration</span><span class="o">!=</span><span class="s1">'2'</span><span class="p">):</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-35"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="s1">'1'</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-36"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-37"></a>    <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-38"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 hour'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-39"></a>    <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-40"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 day'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-41"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-42"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'duration'</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s1">'approveBtn'</span><span class="p">:</span> <span class="s1">''</span><span class="p">}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-43"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-44"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-45"></a><span class="k">def</span> <span class="nf">has_logged_in</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-46"></a>    <span class="sd">'''Checks if login request is successful. Returns false if not.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-47"></a><span class="sd">    '''</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-48"></a>    <span class="c1"># If response is not 200 OK, raise error</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-49"></a>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-50"></a>        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-51"></a>    <span class="c1"># Check if login has failed by searching for a substring in the response</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-52"></a>    <span class="c1"># content</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-53"></a>    <span class="k">elif</span> <span class="s1">'/account/approve'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-54"></a>        <span class="k">return</span> <span class="bp">False</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-55"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-56"></a>    <span class="k">return</span> <span class="bp">True</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-57"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-58"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-59"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-60"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-61"></a>    <span class="c1"># User agent string from Firefox 49 running on a Linux machine</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-62"></a>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span><span class="p">:</span> <span class="s1">'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0'</span><span class="p">}</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-63"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-64"></a>    <span class="n">login_data</span> <span class="o">=</span> <span class="n">get_login_data</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-65"></a>    <span class="n">approve_data</span> <span class="o">=</span> <span class="n">get_approve_data</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-66"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-67"></a>    <span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-68"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-69"></a>        <span class="c1"># Login request</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-70"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/login'</span><span class="p">,</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-71"></a>                <span class="n">data</span><span class="o">=</span><span class="n">login_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-72"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-73"></a>        <span class="c1"># Check if login is successful.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-74"></a>        <span class="k">if</span> <span class="n">has_logged_in</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-75"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Login successful.'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-76"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-77"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Wrong username or password provided. Login failed!'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-78"></a>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-79"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-80"></a>        <span class="c1"># Approve machine request</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-81"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/approve'</span><span class="p">,</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-82"></a>                <span class="n">data</span><span class="o">=</span><span class="n">approve_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-83"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-84"></a>        <span class="c1"># If response is not 200 OK, approval has failed. Exit.</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-85"></a>        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-86"></a>            <span class="n">p</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-87"></a>        <span class="k">else</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-88"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Machine approved successfully.'</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-89"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-90"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-91"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-92"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-93"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-94"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-95"></a>    <span class="c1"># If python2.x, use 'raw_input' else use 'input'</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-96"></a>    <span class="k">try</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-97"></a>        <span class="nb">input</span> <span class="o">=</span> <span class="nb">raw_input</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-98"></a>    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-99"></a>        <span class="k">pass</span>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-100"></a>
-<a name="rest_code_24ea1b31798e420ea8f094f8988b0fc5-101"></a>    <span class="n">main</span><span class="p">()</span>
+<pre class="code python"><a name="rest_code_891db6f530154540b1f8982fe89f9fea-1"></a><span class="ch">#!/usr/bin/env python</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-2"></a><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span><span class="p">,</span> <span class="n">division</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-3"></a><span class="kn">import</span> <span class="nn">requests</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-4"></a><span class="kn">import</span> <span class="nn">getpass</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-5"></a><span class="kn">import</span> <span class="nn">sys</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-6"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-7"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-8"></a><span class="k">def</span> <span class="nf">get_login_data</span><span class="p">():</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-9"></a>    <span class="sd">'''Asks the user for the username and password. Returns a dictionary to be</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-10"></a><span class="sd">    passed to the /account/login post request.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-11"></a><span class="sd">    '''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-12"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-13"></a>    <span class="n">username</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter username (Empty input defaults to "am12d013"): '</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-14"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-15"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">username</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-16"></a>        <span class="n">username</span> <span class="o">=</span> <span class="s1">'am12d013'</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-17"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-18"></a>    <span class="n">password</span> <span class="o">=</span> <span class="s1">''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-19"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-20"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">password</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-21"></a>        <span class="n">password</span> <span class="o">=</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">(</span><span class="s1">'Enter password (Cannot be empty): '</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-22"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-23"></a>    <span class="c1">#return {'username': username, 'password': password}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-24"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'userLogin'</span><span class="p">:</span> <span class="n">username</span><span class="p">,</span> <span class="s1">'userPassword'</span><span class="p">:</span> <span class="n">password</span><span class="p">}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-25"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-26"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-27"></a><span class="k">def</span> <span class="nf">get_approve_data</span><span class="p">():</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-28"></a>    <span class="sd">'''Asks the user for the duration to be logged in for. Returns a dictionary</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-29"></a><span class="sd">    to be passed to the /account/approve post request.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-30"></a><span class="sd">    '''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-31"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-32"></a>    <span class="n">duration</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">'Enter session duration (1: 1 hour, 2: 1 day, empty defaults to 1): '</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-33"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-34"></a>    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">duration</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">duration</span><span class="o">!=</span><span class="s1">'2'</span><span class="p">):</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-35"></a>        <span class="n">duration</span> <span class="o">=</span> <span class="s1">'1'</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-36"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-37"></a>    <span class="k">if</span> <span class="n">duration</span> <span class="o">==</span> <span class="s1">'1'</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-38"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 hour'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-39"></a>    <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-40"></a>        <span class="k">print</span><span class="p">(</span><span class="s1">'You have requested approval for 1 day'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-41"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-42"></a>    <span class="k">return</span> <span class="p">{</span><span class="s1">'duration'</span><span class="p">:</span> <span class="n">duration</span><span class="p">,</span> <span class="s1">'approveBtn'</span><span class="p">:</span> <span class="s1">''</span><span class="p">}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-43"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-44"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-45"></a><span class="k">def</span> <span class="nf">has_logged_in</span><span class="p">(</span><span class="n">response</span><span class="p">):</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-46"></a>    <span class="sd">'''Checks if login request is successful. Returns false if not.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-47"></a><span class="sd">    '''</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-48"></a>    <span class="c1"># If response is not 200 OK, raise error</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-49"></a>    <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-50"></a>        <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-51"></a>    <span class="c1"># Check if login has failed by searching for a substring in the response</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-52"></a>    <span class="c1"># content</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-53"></a>    <span class="k">elif</span> <span class="s1">'/account/approve'</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">content</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-54"></a>        <span class="k">return</span> <span class="bp">False</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-55"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-56"></a>    <span class="k">return</span> <span class="bp">True</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-57"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-58"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-59"></a><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-60"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-61"></a>    <span class="c1"># User agent string from Firefox 49 running on a Linux machine</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-62"></a>    <span class="n">headers</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'User-Agent'</span><span class="p">:</span> <span class="s1">'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:49.0) Gecko/20100101 Firefox/49.0'</span><span class="p">}</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-63"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-64"></a>    <span class="n">login_data</span> <span class="o">=</span> <span class="n">get_login_data</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-65"></a>    <span class="n">approve_data</span> <span class="o">=</span> <span class="n">get_approve_data</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-66"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-67"></a>    <span class="k">with</span> <span class="n">requests</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span> <span class="k">as</span> <span class="n">s</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-68"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-69"></a>        <span class="c1"># Login request</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-70"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/login'</span><span class="p">,</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-71"></a>                <span class="n">data</span><span class="o">=</span><span class="n">login_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-72"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-73"></a>        <span class="c1"># Check if login is successful.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-74"></a>        <span class="k">if</span> <span class="n">has_logged_in</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-75"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Login successful.'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-76"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-77"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Wrong username or password provided. Login failed!'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-78"></a>            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-79"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-80"></a>        <span class="c1"># Approve machine request</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-81"></a>        <span class="n">p</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s1">'https://netaccess.iitm.ac.in/account/approve'</span><span class="p">,</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-82"></a>                <span class="n">data</span><span class="o">=</span><span class="n">approve_data</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">headers</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-83"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-84"></a>        <span class="c1"># If response is not 200 OK, approval has failed. Exit.</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-85"></a>        <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">status_code</span> <span class="o">!=</span> <span class="n">requests</span><span class="o">.</span><span class="n">codes</span><span class="o">.</span><span class="n">ok</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-86"></a>            <span class="n">p</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-87"></a>        <span class="k">else</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-88"></a>            <span class="k">print</span><span class="p">(</span><span class="s1">'Machine approved successfully.'</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-89"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-90"></a>        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-91"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-92"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-93"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">'__main__'</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-94"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-95"></a>    <span class="c1"># If python2.x, use 'raw_input' else use 'input'</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-96"></a>    <span class="k">try</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-97"></a>        <span class="nb">input</span> <span class="o">=</span> <span class="nb">raw_input</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-98"></a>    <span class="k">except</span> <span class="ne">NameError</span><span class="p">:</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-99"></a>        <span class="k">pass</span>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-100"></a>
+<a name="rest_code_891db6f530154540b1f8982fe89f9fea-101"></a>    <span class="n">main</span><span class="p">()</span>
 </pre>
 </div>
         </div>
@@ -297,13 +298,13 @@ didn't want to store it in plain text.</p>
         <div class="post-content">
                 <div>
 <p>Say, you want spotlight to find MacVim. Doing</p>
-<pre class="code bash"><a name="rest_code_877435f0bd11429792e5826105bc8782-1"></a>$ brew linkapps macvim
+<pre class="code bash"><a name="rest_code_e2f978d78f5a47b79824eaffebb77c5a-1"></a>$ brew linkapps macvim
 </pre>
 <p>creates a symlink in <tt class="docutils literal">/Applications</tt>. But Spotlight seems to ignore it. Instead, remove the symlink</p>
-<pre class="code bash"><a name="rest_code_78237d4808054299b3c081c7a82f1bbd-1"></a>$ rm /Applications/MacVim.app
+<pre class="code bash"><a name="rest_code_913de303055344bb920b3bc6d9d90d32-1"></a>$ rm /Applications/MacVim.app
 </pre>
 <p>and do</p>
-<pre class="code bash"><a name="rest_code_17d418c872da454fbff8f035a407efd0-1"></a>$ osascript -e <span class="s1">'tell application "Finder" to make alias file to POSIX file "/usr/local/opt/macvim/MacVim.app" at POSIX file "/Applications"'</span>
+<pre class="code bash"><a name="rest_code_fe2f3e215a9b4442abf2a1a571a0bba8-1"></a>$ osascript -e <span class="s1">'tell application "Finder" to make alias file to POSIX file "/usr/local/opt/macvim/MacVim.app" at POSIX file "/Applications"'</span>
 </pre>
 </div>
         </div>
@@ -321,27 +322,27 @@ didn't want to store it in plain text.</p>
 <ul class="simple">
 <li>Install build dependencies</li>
 </ul>
-<pre class="code bash"><a name="rest_code_4c6974467b5844eea2020701016e91ce-1"></a>$ sudo apt-get build-dep vim
+<pre class="code bash"><a name="rest_code_07507ff92c4f498e8c820256b0dafc16-1"></a>$ sudo apt-get build-dep vim
 </pre>
 <ul class="simple">
 <li>Clone git repo</li>
 </ul>
-<pre class="code bash"><a name="rest_code_86b57445fb284171a3a1b17b41e34cae-1"></a>$ git clone https://github.com/vim/vim.git<span class="sb">``</span>
+<pre class="code bash"><a name="rest_code_24c1844b28b34f4b84970188d609e6d6-1"></a>$ git clone https://github.com/vim/vim.git<span class="sb">``</span>
 </pre>
 <ul class="simple">
 <li>Change to src directory</li>
 </ul>
-<pre class="code bash"><a name="rest_code_e4e5e67a68cc4a2f9850a5620f5d2894-1"></a>$ <span class="nb">cd</span> vim/src
+<pre class="code bash"><a name="rest_code_69af3599583547c080136e00224c6af2-1"></a>$ <span class="nb">cd</span> vim/src
 </pre>
 <ul class="simple">
 <li>Remove files from previous compilation (skip if compiling for the first time)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_c881584c4d3e4030bf45b81bfefd29ac-1"></a>$ sudo make distclean
+<pre class="code bash"><a name="rest_code_42829c836dbb4caeb338f4f75f788125-1"></a>$ sudo make distclean
 </pre>
 <ul class="simple">
 <li>Path to install vim (optional. omit --prefix option in next step if not set)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_ad00d254a0e0487fb9d97bfb0a56dc97-1"></a><span class="nb">export</span> <span class="nv">PREFIX</span><span class="o">=</span><span class="s1">'/path/to/vim/install'</span>
+<pre class="code bash"><a name="rest_code_c98e17ef094d4e0cbd7647354e48b48e-1"></a><span class="nb">export</span> <span class="nv">PREFIX</span><span class="o">=</span><span class="s1">'/path/to/vim/install'</span>
 </pre>
 <ul>
 <li>
@@ -350,65 +351,65 @@ options).</p>
 <ul class="simple">
 <li>For python 2.x</li>
 </ul>
-<pre class="code bash"><a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-2"></a>            --enable-multibyte <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-3"></a>            --enable-rubyinterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-4"></a>            --enable-pythoninterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-5"></a>            --with-python-config-dir<span class="o">=</span>/usr/lib/python2.7/config-x86<span class="se">\_</span><span class="m">64</span>-linux-gnu <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-6"></a>            --enable-perlinterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-7"></a>            --enable-luainterp <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-8"></a>            --enable-cscope <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-10"></a>            --enable-gtk2-check <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-11"></a>            --with-x <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
-<a name="rest_code_0229a89b2e7548aaa9e85e22f8d3801a-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
+<pre class="code bash"><a name="rest_code_12307b5a10ca47059fac02da3f191cad-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-2"></a>            --enable-multibyte <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-3"></a>            --enable-rubyinterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-4"></a>            --enable-pythoninterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-5"></a>            --with-python-config-dir<span class="o">=</span>/usr/lib/python2.7/config-x86<span class="se">\_</span><span class="m">64</span>-linux-gnu <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-6"></a>            --enable-perlinterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-7"></a>            --enable-luainterp <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-8"></a>            --enable-cscope <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-10"></a>            --enable-gtk2-check <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-11"></a>            --with-x <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
+<a name="rest_code_12307b5a10ca47059fac02da3f191cad-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
 </pre>
 <ul class="simple">
 <li>For python 3.x</li>
 </ul>
-<pre class="code bash"><a name="rest_code_58a035be74354811b0f77c7fa44f9806-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-2"></a>            --enable-multibyte <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-3"></a>            --enable-rubyinterp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-4"></a>            --enable-python3interp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-5"></a>            --with-python3-config-dir<span class="o">=</span>/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-6"></a>            --enable-perlinterp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-7"></a>            --enable-luainterp <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-8"></a>            --enable-cscope <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-10"></a>            --enable-gtk2-check <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-11"></a>            --with-x <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
-<a name="rest_code_58a035be74354811b0f77c7fa44f9806-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
+<pre class="code bash"><a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-1"></a>$ ./configure --with-features<span class="o">=</span>huge <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-2"></a>            --enable-multibyte <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-3"></a>            --enable-rubyinterp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-4"></a>            --enable-python3interp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-5"></a>            --with-python3-config-dir<span class="o">=</span>/usr/lib/python3.5/config-3.5m-x86_64-linux-gnu <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-6"></a>            --enable-perlinterp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-7"></a>            --enable-luainterp <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-8"></a>            --enable-cscope <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-9"></a>            --enable-gui<span class="o">=</span>auto <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-10"></a>            --enable-gtk2-check <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-11"></a>            --with-x <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-12"></a>            --with-compiledby<span class="o">=</span><span class="s2">"j.jith"</span> <span class="se">\</span>
+<a name="rest_code_7ea9f35be9ed4f12ba729889a7b35ba1-13"></a>            --prefix<span class="o">=</span><span class="nv">$PREFIX</span>
 </pre>
 </li>
 <li>
 <p class="first">Compile</p>
 </li>
 </ul>
-<pre class="code bash"><a name="rest_code_97c13bc2ef6c480db4b920591db3d624-1"></a>$ make
+<pre class="code bash"><a name="rest_code_6934e667fe144a3bbabbd9a2a25ca84e-1"></a>$ make
 </pre>
 <ul class="simple">
 <li>Run tests</li>
 </ul>
-<pre class="code bash"><a name="rest_code_44522e36b7234de2bda92cc7214eebf8-1"></a>$ make <span class="nb">test</span>
+<pre class="code bash"><a name="rest_code_62dda20e77124e1db1be7f696b5bc3a5-1"></a>$ make <span class="nb">test</span>
 </pre>
 <ul class="simple">
 <li>Install (may need to use <tt class="docutils literal">sudo</tt> if you don't have write permission in <tt class="docutils literal">$PREFIX</tt>)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_ca755540e504451ab65b21906872865e-1"></a>$ make install
+<pre class="code bash"><a name="rest_code_9026a994948641b7b9aa5f7d3b536985-1"></a>$ make install
 </pre>
 <ul class="simple">
 <li>Make default editor/vim/vi/gvim</li>
 </ul>
-<pre class="code bash"><a name="rest_code_87549b942d0847b4ac9534db849e6d0d-1"></a>$ sudo sh -c <span class="s2">"update-alternatives --install /usr/bin/editor editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-2"></a><span class="s2">update-alternatives --set editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-3"></a><span class="s2">update-alternatives --install /usr/bin/vim vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-4"></a><span class="s2">update-alternatives --set vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-5"></a><span class="s2">update-alternatives --install /usr/bin/vi vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-6"></a><span class="s2">update-alternatives --set vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-7"></a><span class="s2">update-alternatives --install /usr/bin/gvim gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim 1;</span>
-<a name="rest_code_87549b942d0847b4ac9534db849e6d0d-8"></a><span class="s2">update-alternatives --set gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim"</span>
+<pre class="code bash"><a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-1"></a>$ sudo sh -c <span class="s2">"update-alternatives --install /usr/bin/editor editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-2"></a><span class="s2">update-alternatives --set editor </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-3"></a><span class="s2">update-alternatives --install /usr/bin/vim vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-4"></a><span class="s2">update-alternatives --set vim </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-5"></a><span class="s2">update-alternatives --install /usr/bin/vi vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-6"></a><span class="s2">update-alternatives --set vi </span><span class="nv">$PREFIX</span><span class="s2">/bin/vim;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-7"></a><span class="s2">update-alternatives --install /usr/bin/gvim gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim 1;</span>
+<a name="rest_code_39c40ebe4ee644fbb3172597ee63ec2f-8"></a><span class="s2">update-alternatives --set gvim </span><span class="nv">$PREFIX</span><span class="s2">/bin/gvim"</span>
 </pre>
 </div>
         </div>
@@ -431,23 +432,23 @@ site</a> and extract the downloaded archive</li>
 <li>Make sure <tt class="docutils literal">adb</tt> and <tt class="docutils literal">fastboot</tt> (components of platform-tools) are in your
 path</li>
 </ul>
-<pre class="code bash"><a name="rest_code_fa1980dc00784f24b385c17773c458d9-1"></a>$ <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>path/to/android/sdk/platform-tools:<span class="nv">$PATH</span>
+<pre class="code bash"><a name="rest_code_527f0071d70a4caa8bc75776d29dc671-1"></a>$ <span class="nb">export</span> <span class="nv">PATH</span><span class="o">=</span>path/to/android/sdk/platform-tools:<span class="nv">$PATH</span>
 </pre>
 <ul class="simple">
 <li>Connect your device to your computer using a USB cable and enable <em>USB
 Debugging</em> in your device's settings. Check if your device is detected.</li>
 </ul>
-<pre class="code bash"><a name="rest_code_ff9621b406fc4babb224dff2c0f3c014-1"></a>$ adb devices
+<pre class="code bash"><a name="rest_code_b4447aa569e848daa5de9eddf3f7e5e7-1"></a>$ adb devices
 </pre>
 <ul class="simple">
 <li>If device is listed, reboot to bootloader</li>
 </ul>
-<pre class="code bash"><a name="rest_code_809138906469455881962555a88c82dd-1"></a>$ adb reboot bootloader
+<pre class="code bash"><a name="rest_code_cdab5025bfbb46348bf617b75aee783e-1"></a>$ adb reboot bootloader
 </pre>
 <ul class="simple">
 <li>Check if your device is detected by fastboot</li>
 </ul>
-<pre class="code bash"><a name="rest_code_b86b79788fb3419eab48b8d2e12fd27e-1"></a>$ fastboot devices
+<pre class="code bash"><a name="rest_code_f8af3abd93184c159b57d7e6716b5336-1"></a>$ fastboot devices
 </pre>
 <ul class="simple">
 <li>You may need to use <tt class="docutils literal">sudo</tt> before <tt class="docutils literal">fastboot</tt> if you get a permission denied
@@ -462,19 +463,19 @@ error</li>
 <li>Whichever script you decide to use, make sure that the interpreter is
 mentioned at the top of the script like</li>
 </ul>
-<pre class="code bash"><a name="rest_code_6c4cbfcc863644a58c179138655a558f-1"></a><span class="ch">#!/bin/sh</span>
+<pre class="code bash"><a name="rest_code_cfae4466a7914e9eaa5eaf117f72f1f7-1"></a><span class="ch">#!/bin/sh</span>
 </pre>
 <ul class="simple">
 <li>If the above line is missing, add it to the top of the script</li>
 <li>Make the script executable (I've chosen <tt class="docutils literal">flash_all.sh</tt>)</li>
 </ul>
-<pre class="code bash"><a name="rest_code_aa0d30e3488c4610ae9e9b689018afa2-1"></a>$ <span class="nb">cd</span> path/to/extracted/ROM/archive
-<a name="rest_code_aa0d30e3488c4610ae9e9b689018afa2-2"></a>$ chmod a+x ./flash_all.sh
+<pre class="code bash"><a name="rest_code_2e864dcf6c1348f1a8582f91efda5d0d-1"></a>$ <span class="nb">cd</span> path/to/extracted/ROM/archive
+<a name="rest_code_2e864dcf6c1348f1a8582f91efda5d0d-2"></a>$ chmod a+x ./flash_all.sh
 </pre>
 <ul class="simple">
 <li>Run the script</li>
 </ul>
-<pre class="code bash"><a name="rest_code_32c4de6bb27d46bab3dc1af7e2e4c4db-1"></a>$ ./flash_all.sh
+<pre class="code bash"><a name="rest_code_12629f485fbf46c9b95a2f4cb33fc80b-1"></a>$ ./flash_all.sh
 </pre>
 <ul class="simple">
 <li>You may need to run <tt class="docutils literal">sudo ./flash_all.sh</tt> if you had to use <tt class="docutils literal">sudo</tt> with <tt class="docutils literal">fastboot</tt>
@@ -527,7 +528,7 @@ ROM, the scipt will reboot your device.</li>
     <!---->
     <!--%endif-->
     <link href="../assets/css/duoshuo.css" type="text/css" rel="stylesheet">
-<script src="../assets/js/jquery.min.js"></script><script src="../assets/js/bootstrap.min.js"></script><script src="../assets/js/moment-with-locales.min.js"></script><script src="../assets/js/fancydates.js"></script><script src="../assets/js/jquery.colorbox-min.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script><script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/jquery-colorbox@1.6.4/jquery.colorbox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.20.1/moment.min.js"></script><script src="../assets/js/fancydates.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
     moment.locale("en");
     fancydates(0, "YYYY-MM-DD HH:mm");
     </script><!-- end fancy dates -->
