@@ -901,6 +901,9 @@ IMAGE_FOLDERS = {'images': 'images'}
 #     ("icon", "/favicon.ico", "16x16"),
 #     ("icon", "/icon_128x128.png", "128x128"),
 # )
+FAVICONS = (
+    ("icon", "/favicon.ico", "16x16"),
+)
 
 # Show teasers (instead of full posts) in indexes? Defaults to False.
 INDEX_TEASERS = True
@@ -1223,7 +1226,7 @@ MARKDOWN_EXTENSIONS = ['markdown.extensions.fenced_code', 'markdown.extensions.c
 # Bootstrap is served from BootstrapCDN (provided by MaxCDN)
 # Set this to False if you want to host your site without requiring access to
 # external resources.
-# USE_CDN = False
+USE_CDN = True
 
 # Check for USE_CDN compatibility.
 # If you are using custom themes, have configured the CSS properly and are
