@@ -55,7 +55,7 @@ FEM solver for visco-thermal acousto-elastic interaction studies
 
 ----
 
-For more, please visit my Github page - `@j-jith <https://github.com/j-jith>`_.
+For more, please visit my GitHub page - `@j-jith <https://github.com/j-jith>`_.
 
 
 .. _pythermophy: https://github.com/j-jith/pythermophy
