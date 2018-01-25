@@ -1,0 +1,77 @@
+## -*- coding: utf-8 -*-
+<%namespace name="helper" file="post_helper.tmpl"/>
+<%namespace name="pheader" file="post_header.tmpl"/>
+<%namespace name="comments" file="comments_helper.tmpl"/>
+<%namespace name="math" file="math_helper.tmpl"/>
+<%inherit file="page.tmpl"/>
+
+<%block name="extra_head">
+${parent.extra_head()}
+
+<link rel="stylesheet" href="assets/css/academicons.min.css">
+<link rel="stylesheet" href="assets/css/font-awesome.min.css">
+
+<style>
+.img-circle {
+  border-radius: 50%;
+}
+#mypic {
+  margin: auto;
+  width: 150px;
+}
+#acadlinks {
+  text-align: center;
+}
+#acadlinks > a {
+  padding: 2px;
+  margin: auto;
+}
+#acadlinks > a:link, #acadlinks > a:visited {
+  color: #444;
+}
+#acadlinks > a:hover, #acadlinks > a:active {
+  color: #1168CC;
+}
+</style>
+</%block>
+
+<%block name="landing_sidebar">
+<div id="mypic" class="row">
+  <img src="/images/me.jpg" class="img-circle">
+</div> <!-- mypic -->
+<div id="acadlinks" class="row">
+    <a href="https://orcid.org/0000-0002-8276-8712">
+      <i class="ai ai-orcid-square ai-3x"></i>
+    </a>
+    <a href="https://scholar.google.co.in/citations?user=yYD3NUAAAAAJ&hl=en">
+      <i class="ai ai-google-scholar-square ai-3x"></i>
+    </a>
+    <a href="https://www.researchgate.net/profile/Jithin_Jith">
+      <i class="ai ai-researchgate-square ai-3x"></i>
+    </a>
+    <a href="https://www.linkedin.com/in/jithin-jith">
+      <i class="fa fa-linkedin-square fa-3x"></i>
+    </a>
+    <a href="https://github.com/j-jith">
+      <i class="fa fa-github-square fa-3x"></i>
+    </a>
+</div> <!-- acadlinks -->
+<!-- <ul>
+  <li>
+    <a href="https://orcid.org/0000-0002-8276-8712">
+      <i class="ai ai-orcid-square ai-3x"></i>
+    </a>
+  </li>
+  <li>
+    <a href="https://scholar.google.co.in/citations?user=yYD3NUAAAAAJ&hl=en">
+      <i class="ai ai-google-scholar-square ai-3x"></i>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.researchgate.net/profile/Jithin_Jith">
+      <i class="ai ai-researchgate-square ai-3x"></i>
+    </a>
+  </li>
+</ul> -->
+</%block>
+
