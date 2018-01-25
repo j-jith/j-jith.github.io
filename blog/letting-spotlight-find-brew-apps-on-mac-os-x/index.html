@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article# " lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Letting Spotlight find Brew Apps on Mac OS X | Jithin Jith</title>
+<link href="../../assets/css/theme.css" type="text/css" rel="stylesheet">
+<link href="../../assets/css/pure.css" type="text/css" rel="stylesheet">
+<link href="../../assets/css/style.css" type="text/css" rel="stylesheet">
+<meta name="theme-color" content="#5670d4">
+<meta name="generator" content="Nikola (getnikola.com)">
+<link rel="alternate" type="application/rss+xml" title="RSS" href="../../rss.xml">
+<link rel="canonical" href="https://j-jith.github.io/blog/letting-spotlight-find-brew-apps-on-mac-os-x/">
+<!--[if lt IE 9]><script src="../../assets/js/html5.js"></script><![endif]--><meta name="author" content="Jithin Jith">
+<link rel="prev" href="../how-to-compile-and-install-vim-80-on-ubuntu/" title="How to Compile and Install Vim 8.0 on Ubuntu" type="text/html">
+<link rel="next" href="../python-script-for-logging-in-to-iit-madras-netaccess/" title="Python script for logging in to IIT Madras netaccess" type="text/html">
+<meta property="og:site_name" content="Jithin Jith">
+<meta property="og:title" content="Letting Spotlight find Brew Apps on Mac OS X">
+<meta property="og:url" content="https://j-jith.github.io/blog/letting-spotlight-find-brew-apps-on-mac-os-x/">
+<meta property="og:description" content="Say, you want spotlight to find MacVim. Doing
+$ brew linkapps macvim
+creates a symlink in /Applications. But Spotlight seems to ignore it. Instead, remove the symlink
+$ rm /Applications/MacVim.app
+and">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2017-10-31T10:52:05+05:30">
+<meta property="article:tag" content="mac">
+<meta property="article:tag" content="osx">
+</head>
+<body>
+<div class="body_container">
+    <div id="header">
+        <div class="site-name">
+                <h1>Jithin Jith</h1>
+        </div>
+
+        <div id="nav-menu">
+            <div class="bitcron_nav_container">
+                <div class="bitcron_nav">
+                    <div class="site_nav_wrap">
+                        <ul class="site_nav sm sm-base">
+<li><a href="../../" class="nav__item">Home</a></li>
+            <li><a href="../../publications/" class="nav__item">Publications</a></li>
+            <li><a href="../../software/" class="nav__item">Software</a></li>
+            <li><a href="../../contact/" class="nav__item">Contact</a></li>
+            <li><a href="../" class="nav__item">Blog</a></li>
+            <li><a href="../../archive.html" class="nav__item">Archive</a></li>
+            <li><a href="../../categories/" class="nav__item">Tags</a></li>
+            <li><a href="../../rss.xml" class="nav__item">RSS feed</a></li>
+
+                            
+                        </ul>
+<div class="clear clear_nav_inline_end"></div>
+                    </div>
+                </div>
+                <div class="clear clear_nav_end"></div>
+            </div>
+        </div>
+    </div>
+    <div id="layout">
+        <div class="pure-g">
+            <div class=" pure-u-24-24 pure-u-sm-24-24 pure-u-md-18-24 pure_cell">
+                <div class="content_container">
+                    <!--Body content-->
+                    <div class="row">
+                        
+                        
+<div class="post post-page">
+    <h1 class="post-title">Letting Spotlight find Brew Apps on Mac OS X</h1>
+    <div class="post-meta">2017-10-31 10:52</div>
+    <div class="post-content">
+        <div>
+<p>Say, you want spotlight to find MacVim. Doing</p>
+<pre class="code bash"><a name="rest_code_877435f0bd11429792e5826105bc8782-1"></a>$ brew linkapps macvim
+</pre>
+<p>creates a symlink in <tt class="docutils literal">/Applications</tt>. But Spotlight seems to ignore it. Instead, remove the symlink</p>
+<pre class="code bash"><a name="rest_code_78237d4808054299b3c081c7a82f1bbd-1"></a>$ rm /Applications/MacVim.app
+</pre>
+<p>and do</p>
+<pre class="code bash"><a name="rest_code_17d418c872da454fbff8f035a407efd0-1"></a>$ osascript -e <span class="s1">'tell application "Finder" to make alias file to POSIX file "/usr/local/opt/macvim/MacVim.app" at POSIX file "/Applications"'</span>
+</pre>
+</div>
+    </div>
+    <div class="postpromonav">
+        <nav><ul itemprop="keywords" class="tags">
+<li><a class="tag p-category" href="../../categories/mac/" rel="tag">mac</a></li>
+            <li><a class="tag p-category" href="../../categories/osx/" rel="tag">osx</a></li>
+        </ul>
+<ul class="pager hidden-print">
+<li class="previous">
+                <a href="../how-to-compile-and-install-vim-80-on-ubuntu/" rel="prev" title="How to Compile and Install Vim 8.0 on Ubuntu">Previous post</a>
+            </li>
+            <li class="next">
+                <a href="../python-script-for-logging-in-to-iit-madras-netaccess/" rel="next" title="Python script for logging in to IIT Madras netaccess">Next post</a>
+            </li>
+        </ul></nav>
+</div>
+    
+    
+
+
+    
+
+</div>
+
+                </div>
+                <!--End of body content-->
+                <div style="clear:both;height:0;"></div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+
+        <div class=" pure-u-6-24 pure_cell">
+            <div id="sidebar">
+                <div class="widget">
+                    <div id="search_bar">
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="footer">
+        Contents © 2018         Jithin Jith - Powered by         <a href="https://getnikola.com" rel="nofollow">Nikola</a>         
+        
+    </div>
+
+    <!--FIXME: put these somewhere                            -->
+    <!--%if len(translations) > 1:-->
+    <!--<li>
+</li>-->
+    <!--%endif-->
+    <!--% if show_sourcelink:-->
+    <!--
+    <li>
+        <a href="/blog/letting-spotlight-find-brew-apps-on-mac-os-x/index.rst" id="sourcelink">Source</a>
+    </li>
+-->
+    <!--%endif-->
+    <link href="../../assets/css/duoshuo.css" type="text/css" rel="stylesheet">
+<script src="../../assets/js/jquery.min.js"></script><script src="../../assets/js/bootstrap.min.js"></script><script src="../../assets/js/moment-with-locales.min.js"></script><script src="../../assets/js/fancydates.js"></script><script src="../../assets/js/jquery.colorbox-min.js"></script><script>$('a.image-reference:not(.islink) img:not(.islink)').parent().colorbox({rel:"gal",maxWidth:"100%",maxHeight:"100%",scalePhotos:true});</script><!-- fancy dates --><script>
+    moment.locale("en");
+    fancydates(0, "YYYY-MM-DD HH:mm");
+    </script><!-- end fancy dates -->
+</div>
+</div>
+</body>
+</html>
