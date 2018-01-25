@@ -30,10 +30,10 @@ fluid-structure interactions, and general computational modelling.
 
 ----
 
-A list of my publications can be found in `this page
-<link://slug/publications>`_. Software which I have developed during the course
-of my work, and other projects on which I work during my time off, can be found
-`here <link://slug/software>`_. For more, check me out on Github - `@j-jith
+A list of my publications can be found `here <link://slug/publications>`_.
+Software which I have developed during the course of my work, and other
+projects on which I work during my time off, can be found `here
+<link://slug/software>`_. For more, check me out on GitHub - `@j-jith
 <https://github.com/j-jith>`_.
 
 .. _Indian Institute of Technology Madras: https://www.iitm.ac.in
